@@ -8,7 +8,6 @@ class AssessmentList extends React.Component {
     constructor(props){
         super(props)
 
-        this.auth = props.auth
         this.state = {
             modules: []
         }
