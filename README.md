@@ -1,131 +1,8 @@
-# Lost and Found
+# Assessr
 
-## Week 7 Large group project
+## Sick as project
 
-The focus of this app is to practice using the Full Stack we teach, (with auth) in a large scale app.
-
-The idea of the app is to create a "billboard" style site for people to post about their animals that have gone missing, and for people who have found stray animals to post about them.
-
-The hope is that within a small community this could be a great go to for making sure those run-away floofs make it home safely.
-
-
-## The Tech
-
-A Boilerplate is already set up for you (Thanks Harrison!) with everything you will need to get started. This boilerplate is set up to use:
-
-* [React](https://reactjs.org/docs/getting-started.html)
-* [Redux](https://redux.js.org/)
-* [Express](https://expressjs.com/en/api.html)
-* [Knex.js (SQL)](https://knexjs.org/)
-* [Bulma (CSS framework)](https://bulma.io/documentation/)
-* [JWT Auth (Local)](https://jwt.io/)
-
-The Migration and seeds for the users table, and all login functionality is already set up!
-
-The mobile responsiveness is also being handled by some neat JS and Bulma classes, be sure to incorporate that view in your project goals!
-
-## User Stories
-
-### MVP
-
-As a non-registered user:
-  * I want to register for the App under my name
-  * I want to browse all of the "Found" animals on the site.
-  * I want to to view a list of "Lost" animals posted to the site.
-  * I want to sort the "Lost" or Found" animals by species. (such as Cat / Dog)
-
-As a registered user:
-  * I want to see the contact information for the user that has found an animal that is mine.
-  * I want to be able to inform a user that their "Found" animal is mine through the app, and provide them with contact information of my own.
-  * I want to be able to post about a Lost animal that I have "Found"
-  * I want to be able to post about an animal of my own that has been "Lost"
-
-### Stretch
-
-As an unregistered user:
-  * I want to be able to see a list of all the Animals that have been "Found" after being posted as lost within the site, to give me hope <3
-
-As a registered user:
-  * I want to be able to remove a lost animal that I have posted, as it has been "Found" / Mark it as found.
-  * I want to be able to edit a post I have made about a Lost animal of mine
-  * I want to be able to edit a post I have made about a Found animal of mine
-
-  ---
-
-## Views (Client Side)
-  | name | purpose |
-  | --- | --- |
-  | Login | View for user to enter their login credentials |
-  | Register | View for user to sign up for the App |
-  | FoundPets | View the pets that users have found |
-  | LostPets | View the pets that users have reported as lost |
-  | LostForm | For a User to add a pet that they have lost |
-  | FoundForm | For a user to add a pet that they have found |
-
-
-## Reducers (Client Side)
-
-  | name | purpose |
-  | --- | --- |
-  | auth | Store information regarding user logins, auth status and auth errors |
-  | foundPets | Store the array of pets that have been found (from db) |
-  | lostPets | Store the array of pets that have been lost (from db) |
-
-
-## Actions (Client Side)
-
-  | type | data | purpose |
-  | --- | --- | --- |
-  | RECEIVE_FOUND_PETS | pets | For retreving the found pets from the server response |
-  | ADD_FOUND_PET | pet | For adding a found pet to the client store after is had been added to the db |
-  | RECEIVE_LOST_PETS | pets | For retreving the lost pets from the server response |
-  | ADD_LOST_PET | pet | For adding lost a pet to the client store after is had been added to the db |
-
-
-## API (Client - Server)
-
-| Method | Endpoint | Protected | Usage | Response |
-| --- | --- | --- | --- | --- |
-| Post | /api/auth/login | Yes | Log In a User | The Users JWT Token |
-| Post | /api/auth/register | Yes | Register a User | The Users JWT Token |
-| Get | /api/lost | No | Get the list of lost pets | Array of Objects (object = A Lost Pet) |
-| Get | /api/found | No | Get the list of found pets | Array of Objects (object = A Found Pet) |
-| Post | /api/lost | Yes | Add a Lost pet to the db | The Pet that was added (as an object) |
-| Post | /api/lost | Yes | Add a Found pet to the db | The Pet that was added (as an object) |
-
-## DB (Server Side) -
-  There should be three tables for MVP. You may want/need to add additional columns or tables.
-
-### Lost
-  | Column Name | Data Type | Purpose |
-  | --- | --- | --- |
-  | id | Integer | Unique identifier for each lost animal |
-  | name | String | Name of Lost animal, because names are special <3 |
-  | species | String | What kind of animal is it? |
-  | photo | string | URL of a picture of the lost animal |
-  | user_id | integer | Id of the user who reported the animal as lost |
-
-
-### Found
-  | Column Name | Data Type | Purpose |
-  | --- | --- | --- |
-  | id | Integer | Unique identifier for each found animal |
-  | species | String | What kind of animal is it? |
-  | photo | string | URL of a picture of the found animal |
-  | user_id | integer | Id of the user who found the lost animal |
-
-### Users (Join Table M2M)
-
-  Many Users to Many Pets
-
- | Column Name | Data Type | Purpose |
- | --- | --- | --- |
- | id | Integer | Unique identifier for each user |
- | user_name | string | Used for login |
- | contact_details | string | displayed for contact information |
- | email_address | string | displayed for contact information |
- | hash | text | hashed login password |
- ---
+Making a site where students can view their progress towards assessments, submit assessments, and where teachers can view the progress of the cohort and review work.
 
 
 ## Setup
@@ -136,60 +13,123 @@ Run the following commands in your terminal:
 npm install
 npx knex migrate:latest
 npx knex seed:run
-mv .env.example .env
-```
-
-To run in development:
-```sh
 npm run dev
 ```
 
-To run in production:
-```sh
-npm start
-```
+## User Stories
+
+### MVP
+
+As a student user:
+  * I want to view a list of all assessments
+  * I want to see which assessments I have completed
+  * I want to be able to sort assessments by complete vs incomplete
+  * I want to be able to see when this assessment should be completed
+  * I want to be able to submit a link to a repo I believe completes an assessment
+  * I want to see a list of recommended repos for a given assessment
+
+As a teacher user:
+  * I want to see a list of submitted links
+  * I want to be able to tick a given assessment off for a student
+  * I want to be able to see a specific student's assessment progress
+  * I want to be able to sort a student's completed work by completed vs incompleted
+  * I want to be able to see assessment progress for the entire cohort
+
+### Stretch
+
+As a student user:
+  * I want to be able to see what assessments I have completed vs in progress or incomplete
+  * I want to be able to see what pieces are necessary to complete a given assessment
+  * I want to be able to see what pieces of an assessment I have completed
+  * I want to see which pieces are still necessary for this assessment when submitting
+
+As a teacher user:
+  * I want to be able to tick a student off for specific parts of an assessment
+  * I want to be able to download a transcript of the cohorts results
+
+  ---
+
+## Views
+  | name | user | purpose |
+  | --- | --- | --- |
+  | Login | * | View for user to enter their login credentials |
+  | Register | * | View for user to sign up for the App |
+  | Assessments | Student | View all my assessments and submit links for them |
+  | Student | Teacher | See completion of a student |
+  | Cohort | Teacher | See stats on individual cohorts |
+  | Submissions | Teacher | Page containing list of all submissions |
+  | Marking | Teacher | Place to review link and tick off completion |
 
 
-## Heroku!!!
+## Reducers
 
-### Creating your app
-
-Create your app with `heroku create [name]`
-
-You can check that this was successful by running `heroku apps` to view a list of your apps
+  | name | purpose |
+  | --- | --- |
+  | auth | Store information regarding user logins, auth status and auth errors |
 
 
-### Adding postgres
+## API 
 
-Add postgresql (hobby dev) to your app at `https://dashboard.heroku.com/apps/[APP NAME HERE]/resources`
+All these routes should be protected
 
-Check that pg has been added by running `heroku addons` to ensure the postgresql db is on your app
-
-
-### Deploying!
-
-I have created several npm scripts that will be useful for deploying your app to heroku easily.
-
-To push your local master branch to your heroku app:
-```sh
-npm run h:deploy
-```
-
-Run heroku migrations:
-```sh
-npm run h:migrate
-```
-
-Run heroku seeds:
-```sh
-npm run h:seed
-```
-
-If ever you need to rollback, you can also:
-```sh
-npm run h:rollback
-```
+| Method | Endpoint | User | Usage | Response |
+| --- | --- | --- | --- | --- |
+| Post | /api/auth/login | Log In a User | The Users JWT Token |
+| Post | /api/auth/register | Register a User | The Users JWT Token |
+| TBC |
 
 
-### Ta-Da!
-Your app should be deployed!
+## DB -
+  Users, cohorts, assessments, and modules are all part of MVP. Elements are stretch.
+
+### users
+  | Column Name | Data Type | Purpose |
+  | --- | --- | --- |
+  | id | int | Unique identifier |
+  | actual_name | string | Name of student matching EDA records |
+  | cohort_ id |
+  | user_type | string |
+  | user_name | string |
+  | hash | text | 
+
+### cohorts
+  | Column Name | Data Type | Purpose |
+  | --- | --- | --- |
+  | id | int | Unique identifier |
+  | name | string |
+  | campus | string |
+
+### assessments
+  | Column Name | Data Type | Purpose |
+  | --- | --- | --- |
+  | id | int | Unique identifier |
+  | code | string |
+  | module_id | int |
+  | title | string |
+
+### modules
+  | Column Name | Data Type | Purpose |
+  | --- | --- | --- |
+  | id | int | Unique identifier |
+  | title | string |
+  | course | string |
+
+### users_assessments
+  | Column Name | Data Type | Purpose |
+  | --- | --- | --- |
+  | user_id | int |
+  | assessment_id | int |
+  | status | string |
+
+### elements (Stretch)
+  | Column Name | Data Type | Purpose |
+  | --- | --- | --- |
+  | id | int | Unique identifier |
+  | assessment_id | int |
+  | text | string |
+
+### users_elements (Stretch)
+  | Column Name | Data Type | Purpose |
+  | --- | --- | --- |
+  | user_id | int |
+  | element_id | int |
