@@ -11,6 +11,11 @@ exports.seed = function (knex) {
           id: 1,
           user_name: 'admin',
           hash: hashSync('eda-ike', saltRounds)
+        },
+        {
+          id: 2,
+          user_name: 'kelly',
+          hash: hashSync('kelly', saltRounds)
         }
       ])
     })
