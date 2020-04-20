@@ -86,11 +86,16 @@ All these routes should be protected
   | Column Name | Data Type | Purpose |
   | --- | --- | --- |
   | id | int | Unique identifier |
-  | actual_name | string | Name of student matching EDA records |
-  | cohort_ id |
   | user_type | string |
   | user_name | string |
   | hash | text | 
+  
+### students
+  | Column Name | Data Type | Purpose |
+  | --- | --- | --- |
+  | user_id | int |
+  | actual_name | string | Name of student matching EDA records |
+  | cohort_ id | int |
 
 ### cohorts
   | Column Name | Data Type | Purpose |
@@ -117,10 +122,11 @@ All these routes should be protected
 ### users_assessments
   | Column Name | Data Type | Purpose |
   | --- | --- | --- |
-  | user_id | int |
+  | id | int |
+  | student_id | int |
   | assessment_id | int |
   | status | string |
-
+  
 ### elements (Stretch)
   | Column Name | Data Type | Purpose |
   | --- | --- | --- |
@@ -131,5 +137,12 @@ All these routes should be protected
 ### users_elements (Stretch)
   | Column Name | Data Type | Purpose |
   | --- | --- | --- |
-  | user_id | int |
+  | id | int |
+  | student_assmt_id | int |
   | element_id | int |
+
+### submissions
+  | Column Name | Data Type | Purpose |
+  | --- | --- | --- |
+  | student_assessment_id | int |
+  | evidence | string |
