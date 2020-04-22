@@ -6,7 +6,8 @@ const { decode } = require('../auth/token')
 
 router.get('/', decode, (req, res) => {
     const {user_name} = req.user
-    res.json({key: 'hi ' + user_name})
+    db.getUserAssessments(user_name)
+        .then(arr => res.json(arr))
 })
 
 

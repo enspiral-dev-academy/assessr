@@ -3,12 +3,11 @@ import { connect } from 'react-redux'
 
 import AssessmentList from './AssessmentList'
 
-import { getAllAssessments } from '../apis/assessments'
+import { getCompletedAssessments } from '../actions/assessments'
 
 class ModuleList extends React.Component {
     componentDidMount() {
-        getAllAssessments()
-            .then(console.log)
+        this.props.dispatch(getCompletedAssessments())
     }
 
     render(){
