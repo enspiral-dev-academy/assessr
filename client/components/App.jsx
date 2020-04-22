@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import Login from './Login'
 import Register from './Register'
 import Nav from './Nav'
-import AssessmentList from './AssessmentList'
+import ModuleList from './ModuleList'
 
 
 export function App({auth}) {
@@ -23,7 +23,7 @@ export function App({auth}) {
         </div>
 
         <div className=''>
-          <Route exact path="/" component={auth.isAuthenticated ? AssessmentList : Login} />
+          <Route exact path="/" component={auth.isAuthenticated ? ModuleList : Login} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
         </div>

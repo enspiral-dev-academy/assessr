@@ -79,10 +79,39 @@ All these routes should be protected
 | TBC |
 
 
-## DB -
+## Data
   Users, cohorts, assessments, and modules are all part of MVP. Elements are stretch.
 
-### users
+### DATAFILE
+
+```js
+const modules = [
+  {
+    id: 1,
+    title: 'Foundations: Tech',
+    course: 'Foundations',
+    assessments: [
+      {
+        code: 'FT01',
+        module_id: 1,
+        title: 'Use Git and terminal commands to manage a code base',
+        elements: [
+          {
+            id: 'FT01-1',
+            assessment_code: 'FT01',
+            text: 'Clone a repo'
+          },
+          ...
+        ]
+      },
+      ...
+    ]
+  },
+  ...
+]
+```
+
+### DB - users
   | Column Name | Data Type | Purpose |
   | --- | --- | --- |
   | id | int | Unique identifier |
@@ -90,36 +119,27 @@ All these routes should be protected
   | user_name | string |
   | hash | text | 
   
-### students
+### DB - students
   | Column Name | Data Type | Purpose |
   | --- | --- | --- |
   | user_id | int |
   | actual_name | string | Name of student matching EDA records |
   | cohort_ id | int |
 
-### cohorts
+### DB - cohorts
   | Column Name | Data Type | Purpose |
   | --- | --- | --- |
   | id | int | Unique identifier |
   | name | string |
   | campus | string |
 
-### assessments
+### DB - submissions
   | Column Name | Data Type | Purpose |
   | --- | --- | --- |
-  | id | int | Unique identifier |
-  | code | string |
-  | module_id | int |
-  | title | string |
+  | student_assessment_id | int |
+  | evidence | string |
 
-### modules
-  | Column Name | Data Type | Purpose |
-  | --- | --- | --- |
-  | id | int | Unique identifier |
-  | title | string |
-  | course | string |
-
-### users_assessments
+### DB - users_assessments
   | Column Name | Data Type | Purpose |
   | --- | --- | --- |
   | id | int |
@@ -127,22 +147,9 @@ All these routes should be protected
   | assessment_id | int |
   | status | string |
   
-### elements (Stretch)
-  | Column Name | Data Type | Purpose |
-  | --- | --- | --- |
-  | id | int | Unique identifier |
-  | assessment_id | int |
-  | text | string |
-
-### users_elements (Stretch)
+### DB - users_elements (Stretch)
   | Column Name | Data Type | Purpose |
   | --- | --- | --- |
   | id | int |
   | student_assmt_id | int |
   | element_id | int |
-
-### submissions
-  | Column Name | Data Type | Purpose |
-  | --- | --- | --- |
-  | student_assessment_id | int |
-  | evidence | string |

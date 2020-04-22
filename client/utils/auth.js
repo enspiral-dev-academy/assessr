@@ -24,6 +24,10 @@ export function saveUserToken (token) {
   return decode(token)
 }
 
+export function getUserToken () {
+  return get('token')
+}
+
 export function getUserTokenInfo () {
   const token = get('token')
   return token ? decode(token) : null

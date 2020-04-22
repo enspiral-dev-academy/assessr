@@ -9,11 +9,13 @@ exports.seed = function (knex) {
       return knex('users').insert([
         {
           id: 1,
+          user_type: 'staff',
           user_name: 'admin',
           hash: hashSync('eda-ike', saltRounds)
         },
         {
           id: 2,
+          user_type: 'student',
           user_name: 'kelly',
           hash: hashSync('kelly', saltRounds)
         }

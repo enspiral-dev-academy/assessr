@@ -1,36 +1,28 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-import { getAllAssessments } from '../apis/assessments'
-
-import ModuleList from './ModuleList'
-
-class AssessmentList extends React.Component {
-    constructor(props){
-        super(props)
-
-        this.state = {
-            modules: []
-        }
+function AssessmentList({module, assessments}) {
+    
+    const completed = (code) => {
+        return assessments.find(assmt => {
+            return assmt.code == code
+        })
     }
 
-    componentDidMount() {
-        getAllAssessments()
-            .then(assmts => {
-                this.setState({
-                    modules: assmts
-                })
-            })
-    }
+    return (
+        <div>
+            <h1>--- {module.title} ---</h1>
+            {module.assessments.map(assmt => (
+                <p>{assmt.code}: {assmt.title}{completed(assmt.code) && ' - Done!'}</p>
+            ))}
+        </div>
+    )
+}
 
-    render(){
-        return (
-            <div>
-                <h1>Assessments</h1>
-                {this.state.modules.map(mod => <ModuleList module={mod} />)}
-            </div>
-        )
+function mapStateToProps(state) {
+    return {
+        assessments: state.completed
     }
 }
 
-
-export default AssessmentList
+export default connect(mapStateToProps)(AssessmentList)
