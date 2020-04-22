@@ -29,8 +29,11 @@ As a student user:
   * I want to see a list of recommended repos for a given assessment
 
 As a teacher user:
+  * I want to be able to classify a new user as student or teacher
+  * I want to be able to match a new student user to their records
   * I want to see a list of submitted links
   * I want to be able to tick a given assessment off for a student
+  * I want to see a list of students
   * I want to be able to see a specific student's assessment progress
   * I want to be able to sort a student's completed work by completed vs incompleted
   * I want to be able to see assessment progress for the entire cohort
