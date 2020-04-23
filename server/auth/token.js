@@ -29,9 +29,11 @@ function issue (req, res) {
 }
 
 function createToken (user, secret) {
+  console.log(user)
   const payload = {
     user_id: user.user_id,
-    user_name: user.user_name
+    user_name: user.user_name,
+    user_type: user.user_type
   }
 
   const options = {

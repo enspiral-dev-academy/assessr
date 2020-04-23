@@ -19,6 +19,18 @@ export function isAuthenticated () {
   }
 }
 
+export function isTeacher () {
+  const token = get('token')
+
+  if (token) {
+    const payload = decode(token)
+    const role = payload.user_type
+    return role == 'teacher'
+  }
+  
+  return false
+}
+
 export function saveUserToken (token) {
   set('token', token)
   return decode(token)
