@@ -8,14 +8,23 @@ class AssessmentItem extends React.Component {
         evidence: ""
     }
 
-    status = (code, assessments) => {
-        let match = assessments.find(assmt => {
+    findStatus = (assessments) => {
+        const code = this.props.assessment.code
+        const match = assessments.find(assmt => {
             return assmt.code == code
         })
-        if(match){
-            return match.status == 'complete' ? 'green' : 'yellow'
+        return match ? match.status : "not yet"
+    }
+
+    getColour = (status) => {
+        switch (status) {
+            case 'complete':
+                return 'green'
+            case 'in progress':
+                return 'yellow'
+            default:
+                return 'notyet'
         }
-        return 'notyet'
     }
 
     toggleMore = () => {
@@ -46,14 +55,23 @@ class AssessmentItem extends React.Component {
         )
     }
 
+    renderMore = (status) => {
+        return (
+            <React.Fragment>
+                <h4>{status}</h4>
+                {status != 'complete' && this.renderSubmit()}
+            </React.Fragment>
+        )
+    }
+
     render () {
         const assmt = this.props.assessment
-        const status = this.status(assmt.code, this.props.completed)
+        const status = this.findStatus(this.props.submitted)
 
         return (
-            <div>
-                <p className={status} onClick={this.toggleMore}>{assmt.code}: {assmt.title}</p>
-                {this.state.showMore && this.renderSubmit()}
+            <div className={this.getColour(status)}>
+                <p onClick={this.toggleMore}>{assmt.code}: {assmt.title}</p>
+                {this.state.showMore && this.renderMore(status)}
             </div>
         )
     }
@@ -61,7 +79,7 @@ class AssessmentItem extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        completed: state.completed
+        submitted: state.completed
     }
 }
 
