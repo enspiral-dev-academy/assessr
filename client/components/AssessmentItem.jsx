@@ -33,6 +33,7 @@ class AssessmentItem extends React.Component {
             case 'complete':
                 return 'green'
             case 'in progress':
+            case 'pending review':
                 return 'yellow'
             default:
                 return 'notyet'
