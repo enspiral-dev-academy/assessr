@@ -7,14 +7,14 @@ exports.seed = function (knex) {
           {
             id: 1,
             student_assessment_id: 2,
-            evidence: 'this url i gave you',
-            reviewed: true
+            evidence: 'some link to review',
+            reviewed: false
           },
           {
             id: 2,
             student_assessment_id: 1,
-            evidence: 'some link to review',
-            reviewed: false
+            evidence: 'url with all the stuff working',
+            reviewed: true
           }
         ])
       })
