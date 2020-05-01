@@ -147,7 +147,7 @@ const modules = [
   | --- | --- | --- |
   | id | int |
   | student_id | int |
-  | assessment_id | int |
+  | assessment_code | int |
   | status | string |
   
 ### DB - users_elements (Stretch)

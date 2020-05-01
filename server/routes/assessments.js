@@ -2,12 +2,34 @@ const router = require('express').Router()
 // const verifyJwt = require('express-jwt')
 
 const db = require('../db/assessments')
+const userDb = require('../db/users')
 const { decode } = require('../auth/token')
 
 router.get('/', decode, (req, res) => {
     const {user_name} = req.user
     db.getUserAssessments(user_name)
         .then(arr => res.json(arr))
+})
+
+router.post('/submission', decode, (req, res) => {
+    let {code, evidence} = req.body
+    let {user_name} = req.user
+
+    userDb.getUserByUsername(user_name)
+        .then(user => user.id)
+        .then(user_id => {
+            return db.getUserAssessment(user_id, code)
+                .then(record => (record == undefined) ? db.createRecord(user_id, code).then(arr => arr[0]) : record.id)
+        })
+        .then(student_assessment_id => {
+            let sub = {
+                student_assessment_id,
+                evidence,
+                reviewed: false
+            }
+            return db.saveSubmission(sub)
+                .then(() => res.json({record_id: student_assessment_id}))
+        })
 })
 
 

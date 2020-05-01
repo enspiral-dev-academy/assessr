@@ -7,13 +7,13 @@ exports.seed = function (knex) {
         {
           id: 1,
           student_id: 2,
-          assessment_id: 'FT01',
+          assessment_code: 'FT01',
           status: 'complete'
         },
         {
           id: 2,
           student_id: 2,
-          assessment_id: 'CP06',
+          assessment_code: 'CP06',
           status: 'in progress'
         },
       ])

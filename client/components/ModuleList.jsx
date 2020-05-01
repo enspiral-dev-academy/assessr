@@ -14,7 +14,7 @@ class ModuleList extends React.Component {
         return (
             <div>
                 <h1>Assessments</h1>
-                {this.props.modules.map(mod => <AssessmentList module={mod} />)}
+                {this.props.modules.map((mod, i) => <AssessmentList key={i} module={mod} />)}
             </div>
         )
     }

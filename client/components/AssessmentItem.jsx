@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { submitEvidence } from '../actions/assessments'
+
 class AssessmentItem extends React.Component {
 
     state = {
@@ -8,11 +10,21 @@ class AssessmentItem extends React.Component {
         evidence: ""
     }
 
-    findStatus = (assessments) => {
+    findRecord = (assessments) => {
         const code = this.props.assessment.code
         const match = assessments.find(assmt => {
             return assmt.code == code
         })
+        return match
+    }
+
+    findRecordId(){
+        const match = this.findRecord(this.props.assessments)
+        return match ? match.assessment_record : null
+    }
+
+    findStatus = (assessments) => {
+        const match = this.findRecord(assessments)
         return match ? match.status : "not yet"
     }
 
@@ -40,7 +52,7 @@ class AssessmentItem extends React.Component {
     }
 
     submit = () => {
-        console.log(this.state.evidence + "!")
+        this.props.dispatch(submitEvidence(this.props.assessment.code, this.state.evidence))
         this.setState({
             evidence: ""
         })

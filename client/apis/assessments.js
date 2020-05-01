@@ -7,3 +7,10 @@ export function getUserAssessments() {
         .set({ 'Authorization': `Bearer ${getUserToken()}` })
         .then(res => res.body)
 }
+
+export function saveSubmission(code, evidence) {
+    return request.post('/api/assessments/submission')
+        .set({ 'Authorization': `Bearer ${getUserToken()}` })
+        .send({code, evidence})
+        .then(res => res.body.record_id)
+}
