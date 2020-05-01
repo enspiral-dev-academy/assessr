@@ -21,34 +21,34 @@ npm run dev
 ### MVP
 
 As a student user:
-  * I want to view a list of all assessments
-  * I want to see which assessments I have completed
-  * I want to be able to sort assessments by complete vs incomplete
-  * I want to be able to see when this assessment should be completed
-  * I want to be able to submit a link to a repo I believe completes an assessment
-  * I want to see a list of recommended repos for a given assessment
+  [ ] I want to view a list of all assessments
+  [ ] I want to see which assessments I have completed
+  [ ] I want to be able to sort assessments by complete vs incomplete
+  [ ] I want to be able to see when this assessment should be completed
+  [ ] I want to be able to submit a link to a repo I believe completes an assessment
+  [ ] I want to see a list of recommended repos for a given assessment
 
 As a teacher user:
-  * I want to be able to classify a new user as student or teacher
-  * I want to be able to match a new student user to their records
-  * I want to see a list of submitted links
-  * I want to be able to tick a given assessment off for a student
-  * I want to see a list of students
-  * I want to be able to see a specific student's assessment progress
-  * I want to be able to sort a student's completed work by completed vs incompleted
-  * I want to be able to see assessment progress for the entire cohort
+  [ ] I want to be able to classify a new user as student or teacher
+  [ ] I want to be able to match a new student user to their records
+  [ ] I want to see a list of submitted links
+  [ ] I want to be able to tick a given assessment off for a student
+  [ ] I want to see a list of students
+  [ ] I want to be able to see a specific student's assessment progress
+  [ ] I want to be able to sort a student's completed work by completed vs incompleted
+  [ ] I want to be able to see assessment progress for the entire cohort
 
 ### Stretch
 
 As a student user:
-  * I want to be able to see what assessments I have completed vs in progress or incomplete
-  * I want to be able to see what pieces are necessary to complete a given assessment
-  * I want to be able to see what pieces of an assessment I have completed
-  * I want to see which pieces are still necessary for this assessment when submitting
+  [ ] I want to be able to see what assessments I have completed vs in progress or incomplete
+  [ ] I want to be able to see what pieces are necessary to complete a given assessment
+  [ ] I want to be able to see what pieces of an assessment I have completed
+  [ ] I want to see which pieces are still necessary for this assessment when submitting
 
 As a teacher user:
-  * I want to be able to tick a student off for specific parts of an assessment
-  * I want to be able to download a transcript of the cohorts results
+  [ ] I want to be able to tick a student off for specific parts of an assessment
+  [ ] I want to be able to download a transcript of the cohorts results
 
   ---
 
