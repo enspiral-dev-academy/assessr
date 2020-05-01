@@ -14,6 +14,12 @@ exports.seed = function (knex) {
           id: 2,
           student_id: 2,
           assessment_code: 'CP06',
+          status: 'pending review'
+        },
+        {
+          id: 3,
+          student_id: 2,
+          assessment_code: 'CP01',
           status: 'in progress'
         },
       ])
