@@ -1,8 +1,11 @@
 import React from 'react'
+import {connect} from 'react-redux'
+
+import {getAllPending} from '../actions/teacher'
 
 class TeacherHome extends React.Component {
-    state = {
-        pending: []
+    componentDidMount() {
+        this.props.dispatch(getAllPending())
     }
 
     render() {
@@ -10,12 +13,24 @@ class TeacherHome extends React.Component {
             <div>
                 <p>Welcome Teacher!</p>
                 <p>Evidence submitted for review:</p>
-                {this.state.pending.map(thing => {
-                    <p>{thing}</p>
-                })}
+                {this.props.pending.map(record => (
+                    <>
+                        <p>{record.actual_name} - {record.assessment_code}</p>
+                        <ul>
+                            {record.submissions.map(sub => <li>{sub.evidence}</li>)}
+                        </ul>
+                    </>
+                ))}
             </div>
         )
     }
 }
 
-export default TeacherHome
+function mapState2Props(state) {
+    return {
+        pending: state.pending,
+        modules: state.modules
+    }
+}
+
+export default connect(mapState2Props)(TeacherHome)
