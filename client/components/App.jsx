@@ -6,7 +6,9 @@ import Login from './Login'
 import Register from './Register'
 import Nav from './Nav'
 import ModuleList from './ModuleList'
+import TeacherHome from './TeacherHome'
 
+import {isAuthenticated, isTeacher} from '../utils/auth'
 
 export function App({auth}) {
   return (
@@ -23,7 +25,11 @@ export function App({auth}) {
         </div>
 
         <div className=''>
-          <Route exact path="/" component={auth.isAuthenticated ? ModuleList : Login} />
+          {isAuthenticated() ? 
+            <Route exact path="/" component={isTeacher() ? TeacherHome : ModuleList} />
+            :
+            <Route exact path="/" component={Login} />
+          }
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
         </div>

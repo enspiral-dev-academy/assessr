@@ -9,9 +9,9 @@ exports.seed = function (knex) {
       return knex('users').insert([
         {
           id: 1,
-          user_type: 'staff',
+          user_type: 'teacher',
           user_name: 'admin',
-          hash: hashSync('eda-ike', saltRounds)
+          hash: hashSync('admin', saltRounds)
         },
         {
           id: 2,
