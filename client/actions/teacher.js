@@ -1,9 +1,17 @@
-import { getPendingSubmissions } from '../apis/teacher'
+import { getPendingSubmissions, getStudents, getStudentInfo } from '../apis/teacher'
+import { saveAllCompleted } from './assessments'
 
-export function saveAllPending(subs) {
+export function saveAllPending(pending) {
     return {
         type: 'SAVE_PENDING',
-        pending: subs
+        pending
+    }
+}
+
+export function saveAllStudents(students) {
+    return {
+        type: 'SAVE_ALL_STUDENTS',
+        students
     }
 }
 
@@ -14,5 +22,22 @@ export function getAllPending () {
                 dispatch(saveAllPending(subs))
             })
     }
-  }
+}
 
+export function getAllStudents () {
+    return dispatch => {
+        getStudents()
+            .then(students => {
+                dispatch(saveAllStudents(students))
+            })
+    }
+}
+
+export function getStudentAssessments (id) {
+    return dispatch => {
+        getStudentInfo(id)
+            .then(assmts => {
+                dispatch(saveAllCompleted(assmts))
+            })
+    }
+}

@@ -7,6 +7,9 @@ import Register from './Register'
 import Nav from './Nav'
 import ModuleList from './ModuleList'
 import TeacherHome from './TeacherHome'
+import Students from './Students'
+import StudentView from './StudentView'
+
 
 import {isAuthenticated, isTeacher} from '../utils/auth'
 
@@ -30,6 +33,12 @@ export function App({auth}) {
             :
             <Route exact path="/" component={Login} />
           }
+          {isAuthenticated() && isTeacher() && (
+            <>
+              <Route exact path="/students" component={Students} />
+              <Route path="/students/:id" component={StudentView} />
+            </>
+          )}
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
         </div>

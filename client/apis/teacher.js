@@ -7,3 +7,15 @@ export function getPendingSubmissions() {
         .set({ 'Authorization': `Bearer ${getUserToken()}` })
         .then(res => res.body)
 }
+
+export function getStudents() {
+    return request.get('/api/students')
+        .set({ 'Authorization': `Bearer ${getUserToken()}` })
+        .then(res => res.body)
+}
+
+export function getStudentInfo(id) {
+    return request.get('/api/students/' + id)
+        .set({ 'Authorization': `Bearer ${getUserToken()}` })
+        .then(res => res.body)
+}

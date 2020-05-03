@@ -32,9 +32,10 @@ class AssessmentItem extends React.Component {
         switch (status) {
             case 'complete':
                 return 'green'
-            case 'in progress':
             case 'pending review':
                 return 'yellow'
+            case 'in progress':
+                return 'orange'
             default:
                 return 'notyet'
         }
