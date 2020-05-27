@@ -22,7 +22,6 @@ router.get('/:id', decode, (req, res) => {
     } else {
         db.getStudentInfo(req.params.id)
             .then(assmts => {
-                console.log(assmts)
                 assmts = assmts.map(assmt => {
                     return subDb.getSubmissionByRecordId(assmt.assessment_record)
                         .then(subs => {

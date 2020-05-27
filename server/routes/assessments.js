@@ -11,10 +11,8 @@ router.get('/', decode, (req, res) => {
     db.getUserAssessments(user_name)
         .then(assmts => {
             let queries = assmts.map(obj => {
-                console.log("assessment", obj)
                 return subDb.getSubmissionByRecordId(obj.assessment_record)
                     .then(subs => {
-                        console.log("subs", subs)
                         obj.evidence = subs
                         return obj
                     })

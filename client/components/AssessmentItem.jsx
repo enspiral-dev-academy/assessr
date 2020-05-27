@@ -33,7 +33,6 @@ class AssessmentItem extends React.Component {
         let match = assessments.find(assmt => {
             return assmt.code == code
         })
-        console.log('MATCH', match)
         return (match != undefined) ? match.evidence : []
     }
 
@@ -79,7 +78,6 @@ class AssessmentItem extends React.Component {
     }
 
     renderMore = (status, evidence) => {
-        console.log(evidence)
         return (
             <React.Fragment>
                 <h4>{status}</h4>
@@ -96,7 +94,7 @@ class AssessmentItem extends React.Component {
         const assmt = this.props.assessment
         const status = this.findStatus(this.props.completed)
         const evidence = this.findEvidence(this.props.completed)
-        
+
         return (
             <div className={this.getColour(status)}>
                 <p onClick={this.toggleMore}>{assmt.code}: {assmt.title}</p>
