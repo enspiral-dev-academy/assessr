@@ -7,6 +7,13 @@ function getPendingSubmissions (testDb) {
         .where('reviewed', false)
 }
 
+function getSubmissionByRecordId (record_id, testDb) {
+    const db = testDb || connection
+
+    return db('submissions')
+        .where('student_assessment_id', record_id)
+}
+
 function getStudentByRecordId (record_id, testDb) {
     const db = testDb || connection
 
@@ -19,5 +26,6 @@ function getStudentByRecordId (record_id, testDb) {
 
 module.exports = {
     getPendingSubmissions,
+    getSubmissionByRecordId,
     getStudentByRecordId
 }

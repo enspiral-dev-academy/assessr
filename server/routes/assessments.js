@@ -1,14 +1,29 @@
 const router = require('express').Router()
-// const verifyJwt = require('express-jwt')
+
+const { decode } = require('../auth/token')
 
 const db = require('../db/assessments')
 const userDb = require('../db/users')
-const { decode } = require('../auth/token')
+const subDb = require('../db/submissions')
 
 router.get('/', decode, (req, res) => {
     const {user_name} = req.user
     db.getUserAssessments(user_name)
+        .then(assmts => {
+            let queries = assmts.map(obj => {
+                console.log("assessment", obj)
+                return subDb.getSubmissionByRecordId(obj.assessment_record)
+                    .then(subs => {
+                        console.log("subs", subs)
+                        obj.evidence = subs
+                        return obj
+                    })
+            })
+            return Promise.all(queries)
+        })
         .then(arr => res.json(arr))
+        .catch(err => res.status(500).send({message: `Server Error`}))
+
 })
 
 router.post('/submission', decode, (req, res) => {

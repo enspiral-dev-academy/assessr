@@ -2,6 +2,7 @@ const router = require('express').Router()
 // const verifyJwt = require('express-jwt')
 
 const db = require('../db/students')
+const subDb = require('../db/submissions')
 const { decode } = require('../auth/token')
 
 router.get('/', decode, (req, res) => {
@@ -20,7 +21,17 @@ router.get('/:id', decode, (req, res) => {
         res.json({})
     } else {
         db.getStudentInfo(req.params.id)
-            .then(assmts => res.json(assmts))
+            .then(assmts => {
+                console.log(assmts)
+                assmts = assmts.map(assmt => {
+                    return subDb.getSubmissionByRecordId(assmt.assessment_record)
+                        .then(subs => {
+                            assmt.submissions = subs
+                            return assmt
+                        })
+                })
+                Promise.all(assmts).then(assmts => res.json(assmts))
+            })
     }
 })
 
