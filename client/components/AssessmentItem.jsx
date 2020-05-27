@@ -28,6 +28,15 @@ class AssessmentItem extends React.Component {
         return match ? match.status : "not yet"
     }
 
+    findEvidence = (assessments) => {
+        const code = this.props.assessment.code
+        let match = assessments.find(assmt => {
+            return assmt.code == code
+        })
+        console.log('MATCH', match)
+        return (match != undefined) ? match.evidence : []
+    }
+
     getColour = (status) => {
         switch (status) {
             case 'complete':
@@ -69,10 +78,15 @@ class AssessmentItem extends React.Component {
         )
     }
 
-    renderMore = (status) => {
+    renderMore = (status, evidence) => {
+        console.log(evidence)
         return (
             <React.Fragment>
                 <h4>{status}</h4>
+                <p>Evidence Submitted:</p>
+                <ul>
+                    {evidence.map(e => <li>{e.evidence}</li>)}
+                </ul>
                 {status != 'complete' && this.renderSubmit()}
             </React.Fragment>
         )
@@ -80,12 +94,13 @@ class AssessmentItem extends React.Component {
 
     render () {
         const assmt = this.props.assessment
-        const status = this.findStatus(this.props.submitted)
-
+        const status = this.findStatus(this.props.completed)
+        const evidence = this.findEvidence(this.props.completed)
+        
         return (
             <div className={this.getColour(status)}>
                 <p onClick={this.toggleMore}>{assmt.code}: {assmt.title}</p>
-                {this.state.showMore && this.renderMore(status)}
+                {this.state.showMore && this.renderMore(status, evidence)}
             </div>
         )
     }
@@ -93,7 +108,7 @@ class AssessmentItem extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        submitted: state.completed
+        completed: state.completed
     }
 }
 

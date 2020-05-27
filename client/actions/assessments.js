@@ -34,7 +34,7 @@ export function submitEvidence(code, evidence) {
     return dispatch => {
         return saveSubmission(code, evidence)
             .then(record_id => {
-                dispatch({type: 'PENDING_ASSESSMENT', code, record_id})
+                dispatch({type: 'PENDING_ASSESSMENT', code, record_id, evidence})
             })
     }
 }

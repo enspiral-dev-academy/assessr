@@ -5,11 +5,17 @@ export default function completed (state = initialState, action) {
     case 'SAVE_COMPLETED':
       return action.completed
     case 'PENDING_ASSESSMENT':
+      let evidence = {
+        evidence: action.evidence,
+        reviewed: false
+      }
+
       // try update existing
       let updated = false
       state = state.map(assmt => {
         if(assmt.code == action.code) {
           assmt.status = "pending review"
+          assmt.evidence.push(evidence)
           updated = true
         }
         return assmt
@@ -19,7 +25,8 @@ export default function completed (state = initialState, action) {
         state = [...state, {
           code: action.code, 
           status: "pending review", 
-          assessment_record : action.record_id
+          assessment_record: action.record_id,
+          evidence: [evidence]
         }]
       }
       return state
