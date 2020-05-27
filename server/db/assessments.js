@@ -38,7 +38,7 @@ function createRecord (student_id, assessment_code, testDb) {
         .insert({
             student_id,
             assessment_code,
-            status: 'in progress'
+            status: 'pending review'
         })
 }
 
