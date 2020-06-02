@@ -49,6 +49,8 @@ As a student user:
 As a teacher user:
 - [ ] I want to be able to tick a student off for specific parts of an assessment
 - [ ] I want to be able to download a transcript of the cohorts results
+- [ ] Graphs!
+- [ ] I want to be able to add a comment as to what is missing on an assessment after reviewing a submission
 
   ---
 

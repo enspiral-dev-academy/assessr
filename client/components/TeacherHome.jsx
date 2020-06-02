@@ -1,6 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+import SubmittedItem from './SubmittedItem'
+
 import {getAllPending} from '../actions/teacher'
 
 class TeacherHome extends React.Component {
@@ -11,14 +13,12 @@ class TeacherHome extends React.Component {
     render() {
         return (
             <div>
-                <p>Welcome Teacher!</p>
+                <h1>W B!</h1>
+                <p>Welcome Back Teacher!</p>
                 <p>Evidence submitted for review:</p>
                 {this.props.pending.map((record, i) => (
                     <React.Fragment key={i}>
-                        <p>{record.actual_name} - {record.assessment_code}</p>
-                        <ul>
-                            {record.submissions.map((sub, i) => <li key={i}>{sub.evidence}</li>)}
-                        </ul>
+                        <SubmittedItem record={record} />
                     </React.Fragment>
                 ))}
             </div>

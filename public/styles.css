@@ -1,3 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Crete+Round&family=Lato:wght@300;400;700&display=swap');
+
+/* for a border #d1bdaa */
+
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #f5f0ec;
+    color: #1e2e3e;
+}
+
+h1, h2, h3 {
+    font-family: 'Crete Round', serif;
+    font-weight: normal;
+    color: #2c2d48;
+}
+
+a {
+    color: #3f6183;
+}
+
 .green {
     background-color: rgb(147, 199, 147);
 }
