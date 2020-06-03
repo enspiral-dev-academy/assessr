@@ -37,6 +37,9 @@ As a teacher user:
 - [ ] I want to be able to see a specific student's assessment progress
 - [ ] I want to be able to sort a student's completed work by completed vs incompleted
 - [ ] I want to be able to see assessment progress for the entire cohort
+- [ ] I want to be able to access json of current assessment data
+- [ ] I want to be able to provide json data of students assessments to be included in the database
+- [ ] I want to be able to add evidence for a given student's assessment
 
 ### Stretch
 
