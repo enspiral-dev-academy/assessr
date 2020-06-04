@@ -1,29 +1,30 @@
 import React from 'react'
 import {connect} from 'react-redux'
+
 import {loginUser, loginError} from '../actions/login'
 
+
 class Login extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      user_name: '',
-      password: ''
-    }
-    this.updateDetails = this.updateDetails.bind(this)
-    this.submit = this.submit.bind(this)
+  state = {
+    user_name: '',
+    password: ''
   }
-  componentDidMount() {
+
+  componentDidMount = () => {
     this.props.dispatch(loginError(''))
   }
-  updateDetails(e) {
+
+  updateDetails = (e) => {
     this.setState({[e.target.name]: e.target.value})
   }
-  submit(e) {
+
+  submit = (e) => {
     e.preventDefault()
     let {user_name, password} = this.state
     this.props.dispatch(loginUser({user_name, password}))
   }
-  render() {
+
+  render = () => {
     const {auth} = this.props
     return (
       <form className="center-form form box" onSubmit={this.submit}>

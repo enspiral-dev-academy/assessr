@@ -1,26 +1,26 @@
 import React from 'react'
 import {connect} from 'react-redux'
+
 import {registerUserRequest} from '../actions/register'
 import {loginError} from '../actions/login'
 
+
 class Register extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      user_name: '',
-      password: '',
-      confirm_password: ''
-    }
-    this.updateDetails = this.updateDetails.bind(this)
-    this.submit = this.submit.bind(this)
+  state = {
+    user_name: '',
+    password: '',
+    confirm_password: ''
   }
-  componentDidMount() {
+  
+  componentDidMount = () => {
     this.props.dispatch(loginError(''))
   }
-  updateDetails(e) {
+
+  updateDetails = (e) => {
     this.setState({[e.target.name]: e.target.value})
   }
-  submit(e) {
+
+  submit = (e) => {
     e.preventDefault()
     e.target.reset()
     let {password, confirm_password} = this.state
@@ -28,7 +28,7 @@ class Register extends React.Component {
     this.props.dispatch(registerUserRequest(this.state))
   }
 
-  render() {
+  render = () => {
     const {auth} = this.props
     return (
       <form className="center-form Register form box" onSubmit={this.submit}>

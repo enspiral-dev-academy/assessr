@@ -1,22 +1,19 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-class StudentSubmissions extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            showSubs: false
-        }
-        this.toggleList = this.toggleList.bind(this)
-    }
 
-    toggleList() {
+class StudentSubmissions extends React.Component {
+    state = {
+        showSubs: false
+    }
+    
+    toggleList = () => {
         this.setState({
             showSubs: !this.state.showSubs
         })
     }
 
-    renderSubmissionList(student) {
+    renderSubmissionList = (student) => {
         return (
             <ul>
                 {student.submissions.map((sub, i) => <li key={i}>{sub.assessment_code}</li>)}
@@ -24,7 +21,7 @@ class StudentSubmissions extends React.Component {
         )
     }
 
-    render(){
+    render = () => {
         const {student} = this.props
         return (
             <>

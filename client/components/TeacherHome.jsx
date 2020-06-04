@@ -5,20 +5,18 @@ import StudentSubmissions from './StudentSubmissions'
 
 import {getAllPending} from '../actions/teacher'
 
+
 class TeacherHome extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            toReview: [],
-            hi: 0
-        }
+    state = {
+        toReview: [],
+        hi: 0
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         this.props.dispatch(getAllPending())
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate = (prevProps) => {
         const oldProps = JSON.stringify(prevProps.pending)
         const newProps = JSON.stringify(this.props.pending)
 
@@ -30,7 +28,7 @@ class TeacherHome extends React.Component {
         }
     }
 
-    orderSubmissions(subs) {
+    orderSubmissions = (subs) => {
         return subs.reduce((students, sub) => {
             
             const formattedSub = {
@@ -59,7 +57,7 @@ class TeacherHome extends React.Component {
         }, [])
     }
 
-    render() {
+    render = () => {
         return (
             <div>
                 <h1>W B!</h1>
@@ -73,7 +71,7 @@ class TeacherHome extends React.Component {
     }
 }
 
-function mapState2Props(state) {
+const mapState2Props = (state) => {
     return {
         pending: state.pending,
         modules: state.modules

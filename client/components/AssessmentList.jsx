@@ -1,9 +1,9 @@
- import React from 'react'
+import React from 'react'
 
 import AssessmentItem from './AssessmentItem'
 
-function AssessmentList({module}) {
 
+function AssessmentList({module}) {
     return (
         <section>
             <h1>{module.title}</h1>

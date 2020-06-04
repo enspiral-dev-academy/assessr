@@ -1,20 +1,20 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+
 import {logoutUser} from '../actions/logout'
 
+
 class Nav extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      showBurger: false
-    }
-    this.toggleBurger = this.toggleBurger.bind(this)
+  state = {
+    showBurger: false
   }
-  toggleBurger() {
+
+  toggleBurger = () => {
     this.setState({showBurger: !this.state.showBurger})
   }
-  render() {
+
+  render = () => {
     const {auth, logout} = this.props
     const {showBurger} = this.state
     return <nav className="navbar">

@@ -5,12 +5,14 @@ import AssessmentList from './AssessmentList'
 
 import { getCompletedAssessments } from '../actions/assessments'
 
+
 class ModuleList extends React.Component {
-    componentDidMount() {
+
+    componentDidMount = () => {
         this.props.dispatch(getCompletedAssessments())
     }
 
-    render(){
+    render = () => {
         return (
             <div>
                 <h1>Assessments</h1>
@@ -20,8 +22,7 @@ class ModuleList extends React.Component {
     }
 }
 
-
-function mapState2Props(state) {
+const mapState2Props = (state) => {
     return {
         modules: state.modules
     }

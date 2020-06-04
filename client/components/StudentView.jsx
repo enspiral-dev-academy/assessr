@@ -1,16 +1,18 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {getStudentAssessments} from '../actions/teacher'
 import AssessmentList from './AssessmentList'
+
+import {getStudentAssessments} from '../actions/teacher'
+
 
 class Students extends React.Component {
 
-    componentDidMount() {
+    componentDidMount = () => {
         this.props.dispatch(getStudentAssessments(this.props.match.params.id))
     }
 
-    render() {
+    render = () => {
         return (
             <div>
                 {this.props.modules.map(mod => <AssessmentList module={mod} />)}
@@ -19,11 +21,10 @@ class Students extends React.Component {
     }
 }
 
-function mapState2Props(state) {
+const mapState2Props = (state) => {
     return {
         modules: state.modules
     }
 }
-
 
 export default connect(mapState2Props)(Students)

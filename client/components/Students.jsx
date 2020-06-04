@@ -4,12 +4,14 @@ import {Link} from 'react-router-dom'
 
 import {getAllStudents} from '../actions/teacher'
 
+
 class Students extends React.Component {
-    componentDidMount() {
+
+    componentDidMount = () => {
         this.props.dispatch(getAllStudents())
     }
 
-    render() {
+    render = () => {
         return (
             <div>
                 <p>Click on a Student to view their assessments:</p>
@@ -21,7 +23,7 @@ class Students extends React.Component {
     }
 }
 
-function mapState2Props(state) {
+const mapState2Props = (state) => {
     return {
         students: state.students
     }

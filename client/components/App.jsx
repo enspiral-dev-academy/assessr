@@ -10,8 +10,8 @@ import TeacherHome from './TeacherHome'
 import Students from './Students'
 import StudentView from './StudentView'
 
-
 import {isAuthenticated, isTeacher} from '../utils/auth'
+
 
 export function App({auth}) {
   return (

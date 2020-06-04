@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 
 import { submitEvidence } from '../actions/assessments'
 
-class AssessmentItem extends React.Component {
 
+class AssessmentItem extends React.Component {
     state = {
         showMore: false,
         evidence: ""
@@ -18,7 +18,7 @@ class AssessmentItem extends React.Component {
         return match
     }
 
-    findRecordId(){
+    findRecordId = () => {
         const match = this.findRecord(this.props.assessments)
         return match ? match.assessment_record : null
     }
@@ -90,7 +90,7 @@ class AssessmentItem extends React.Component {
         )
     }
 
-    render () {
+    render = () => {
         const assmt = this.props.assessment
         const status = this.findStatus(this.props.completed)
         const evidence = this.findEvidence(this.props.completed)
