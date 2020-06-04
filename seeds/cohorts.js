@@ -6,7 +6,8 @@ exports.seed = function (knex) {
       return knex('cohorts').insert([
         {
           id: 31,
-          name: 'Hihi 2017',
+          name: 'Hihi',
+          year: 2020,
           campus: 'Wellington'
         }
       ])
