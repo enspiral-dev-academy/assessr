@@ -39,14 +39,14 @@ function createRecord (student_id, assessment_code, testDb) {
             student_id,
             assessment_code,
             status: 'pending review'
-        })
+        }, 'id')
 }
 
 function saveSubmission (submission, testDb) {
     const db = testDb || connection
 
     return db('submissions')
-        .insert(submission)
+        .insert(submission, 'id')
 }
 
 module.exports = {

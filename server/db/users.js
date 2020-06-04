@@ -7,7 +7,8 @@ function createUser (user_name, password, testDb) {
 
   return generatePasswordHash(password)
     .then(hash => {
-      return db('users').insert({user_name, hash})
+      return db('users')
+        .insert({user_name, hash}, 'id')
     })
 }
 
