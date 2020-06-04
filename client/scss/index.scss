@@ -24,6 +24,13 @@ a {
   color: $brand-highlight;
 }
 
+// Grid
+.container {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1100px;
+}
+
 
 // Header
 // -------
@@ -33,6 +40,11 @@ a {
   align-items: center;
   background-color: $brand-dark;
   padding: 0 2rem;
+
+  a {
+    text-decoration: none;
+    color: $text-light;
+  }
 }
 
 .logo-title {
@@ -41,17 +53,14 @@ a {
   padding: 1rem .8rem;
 }
 
-.navbar a {
-  text-decoration: none;
-  color: $text-light;
-}
-
 .navbar-item {
   display: inline-block;
   padding: .8rem;
 }
 
+
 // Forms
+// -----
 input, button {
   border-width: 1px;
   border-radius: .2rem;
@@ -61,36 +70,28 @@ input, button {
 
 .center-form {
   max-width: 400px;
-  margin: 0 auto
-}
+  margin: 0 auto;
 
-.center-form label {
-  width: 20%;
-}
+  label {
+    width: 20%;
+  }
 
-.center-form input {
-  width: 80%;
-}
+  input {
+    width: 80%;
+  }
 
-.center-form input[type="submit"] {
-  width: 100%;
-  border-color: $brand-highlight;
-  background-color: $brand-highlight;
-  color: $text-light;
+  input[type="submit"] {
+    width: 100%;
+    border-color: $brand-highlight;
+    background-color: $brand-highlight;
+    color: $text-light;
+  }
 }
 
 .form-row {
   display: flex;
   align-items: center;
   margin-bottom: .8rem;
-}
-
-
-/* Grid */
-.container {
-  margin: 0 auto;
-  width: 90%;
-  max-width: 1100px;
 }
 
 
@@ -132,6 +133,3 @@ input, button {
 .yellow {
   background-color: rgb(223, 217, 150);
 }
-
-
-
