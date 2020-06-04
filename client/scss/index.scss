@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Crete+Round&family=Lato:wght@300;400;700&display=swap');
+@import './variables.scss';
+
+// Base
+*, html {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: $font-base;
+  background-color:$body-bg;
+  color: $text-color;
+  font-size: 16px;
+}
+
+h1, h2, h3 {
+  font-family: $font-headings;
+  font-weight: normal;
+  color: $brand-dark;
+}
+
+a {
+  color: $brand-highlight;
+}
+
+
+// Header
+// -------
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $brand-dark;
+  padding: 0 2rem;
+}
+
+.logo-title {
+  font-size: 2.4rem;
+  margin: 0;
+  padding: 1rem .8rem;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: $text-light;
+}
+
+.navbar-item {
+  display: inline-block;
+  padding: .8rem;
+}
+
+// Forms
+input, button {
+  border-width: 1px;
+  border-radius: .2rem;
+  padding: .5rem .8rem;
+  background-color: $body-bg; 
+}
+
+.center-form {
+  max-width: 400px;
+  margin: 0 auto
+}
+
+.center-form label {
+  width: 20%;
+}
+
+.center-form input {
+  width: 80%;
+}
+
+.center-form input[type="submit"] {
+  width: 100%;
+  border-color: $brand-highlight;
+  background-color: $brand-highlight;
+  color: $text-light;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: .8rem;
+}
+
+
+/* Grid */
+.container {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1100px;
+}
+
+
+// Assmt List
+// ------------
+.assmt {
+  border-bottom: 1px solid $border-color;
+  padding: 1rem;
+
+  @include tablet {
+    width: 24%;
+    margin: .5%;
+    border: 1px solid $border-color;
+    padding: 2rem;
+    border-radius: .4rem;
+  }
+}
+
+.assmt-row {
+
+  @include tablet {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+}
+
+
+// Utils
+// -------
+.green {
+  background-color: rgb(147, 199, 147);
+}
+
+.orange {
+  background-color: rgb(208, 148, 116);
+}
+
+.yellow {
+  background-color: rgb(223, 217, 150);
+}
+
+
+
