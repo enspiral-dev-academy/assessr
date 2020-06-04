@@ -26,16 +26,18 @@ class Login extends React.Component {
   render() {
     const {auth} = this.props
     return (
-      <form className="form box" onSubmit={this.submit}>
+      <form className="center-form form box" onSubmit={this.submit}>
         <h1 className="title is-2">Login</h1>
         <hr />
         {auth.errorMessage && <span className="has-text-danger is-large">{auth.errorMessage}</span>}
-        <label className="label is-large has-text-centered">Username
+        <div className="form-row">  
+          <label className="label is-large has-text-centered" for="user_name">Username</label>
           <input required className="input has-text-centered is-large is-fullwidth" placeholder="User Name" type="text" name="user_name" onChange={this.updateDetails}/>
-        </label>
-        <label className="label is-large has-text-centered">Password
+        </div>
+        <div className="form-row">  
+          <label className="label is-large has-text-centered" for="password">Password</label>
           <input required className="input has-text-centered is-large is-fullwidth" placeholder="Password" type="password" name="password" onChange={this.updateDetails}/>
-        </label>
+        </div>
         <input className="button is-large is-fullwidth is-success" value='Login' type="submit" />
       </form>
     )

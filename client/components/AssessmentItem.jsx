@@ -70,10 +70,10 @@ class AssessmentItem extends React.Component {
 
     renderSubmit = () => {
         return (
-            <React.Fragment>
+            <div className="assmt-form">
                 <input type='text' onChange={this.handleTyping} value={this.state.evidence} />
                 <button onClick={this.submit}>Submit</button>
-            </React.Fragment>
+            </div>
         )
     }
 
@@ -96,10 +96,10 @@ class AssessmentItem extends React.Component {
         const evidence = this.findEvidence(this.props.completed)
 
         return (
-            <div className={this.getColour(status)}>
+            <article className={`assmt ${this.getColour(status)}`}>
                 <p onClick={this.toggleMore}>{assmt.code}: {assmt.title}</p>
                 {this.state.showMore && this.renderMore(status, evidence)}
-            </div>
+            </article>
         )
     }
 }
