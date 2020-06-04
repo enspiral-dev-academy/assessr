@@ -7,6 +7,7 @@
 }
 
 body {
+    margin: 0;
     font-family: 'Lato', sans-serif;
     background-color: #f5f0ec;
     color: #1e2e3e;
@@ -23,9 +24,33 @@ a {
     color: #3f6183;
 }
 
-/* Forms */
+/* Nav */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2c2d48;
+    padding: 0 2rem;
+}
 
-input, button  {
+.logo-title {
+    font-size: 2.4rem;
+    margin: 0;
+    padding: 1rem .8rem;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.navbar-item {
+    display: inline-block;
+    padding: .8rem;
+}
+
+/* Forms */
+input, button {
     border-width: 1px;
     border-radius: .2rem;
     padding: .5rem .8rem;
@@ -47,8 +72,8 @@ input, button  {
 
 .center-form input[type="submit"] {
     width: 100%;
-    border-color: #2c2d48;
-    background-color: #2c2d48;
+    border-color: #3f6183;
+    background-color: #3f6183;
     color: #fff;
 }
 

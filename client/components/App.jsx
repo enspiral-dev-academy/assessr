@@ -16,17 +16,10 @@ import {isAuthenticated, isTeacher} from '../utils/auth'
 export function App({auth}) {
   return (
     <Router>
+      <Nav />
       <div className="container has-text-centered">
-
-        <div className="hero is-small is-primary">
-          <div className="hero-body has-text-centered">
-            <Link to='/' className="">
-              <h1 className="title is-1">Assessr</h1>
-            </Link>
-            <Nav />
-          </div>
-        </div>
-
+        
+  
         <div className=''>
           {isAuthenticated() ? 
             <Route exact path="/" component={isTeacher() ? TeacherHome : ModuleList} />
@@ -34,10 +27,10 @@ export function App({auth}) {
             <Route exact path="/" component={Login} />
           }
           {isAuthenticated() && isTeacher() && (
-            <>
+            <React.Fragment>
               <Route exact path="/students" component={Students} />
               <Route path="/students/:id" component={StudentView} />
-            </>
+            </React.Fragment>
           )}
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />

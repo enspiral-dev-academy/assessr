@@ -6,38 +6,21 @@ import {logoutUser} from '../actions/logout'
 
 
 class Nav extends React.Component {
-  state = {
-    showBurger: false
-  }
-
-  toggleBurger = () => {
-    this.setState({showBurger: !this.state.showBurger})
-  }
 
   render = () => {
     const {auth, logout} = this.props
-    const {showBurger} = this.state
     return <nav className="navbar">
-      <div className="container">
-        <div className="navbar-brand">
-          <span onClick={this.toggleBurger} className={`navbar-burger burger ${showBurger ? 'is-active': ''}`} data-target="navbarMenuHeroA">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
-        </div>
-        <div id="navbarMenuHeroA" className={`navbar-menu ${showBurger ? "is-active" : ''}`}>
+      
+        <h1 className="logo-title"> <Link to='/' className="">Assessr </Link></h1>
           <div className="navbar-end">
             {auth.isAuthenticated
-              ? <Link to='/' className="navbar-item is-large" onClick={() => logout()}>Logout</Link>
+              ? <Link to='/' className="navbar-item" onClick={() => logout()}>Logout</Link>
               : [
-                <Link onClick={this.toggleBurger} className="navbar-item is-large" to='/login'>Login</Link>,
-                <Link onClick={this.toggleBurger} className="navbar-item" to='/register'>Register</Link>
+                <Link className="navbar-item" to='/login'>Login</Link>,
+                <Link className="navbar-item" to='/register'>Register</Link>
               ]
             }
           </div>
-        </div>
-      </div>
     </nav>
   }
 }
