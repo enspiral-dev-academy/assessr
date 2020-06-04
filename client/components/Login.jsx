@@ -31,11 +31,11 @@ class Login extends React.Component {
         <hr />
         {auth.errorMessage && <span className="has-text-danger is-large">{auth.errorMessage}</span>}
         <div className="form-row">  
-          <label className="label is-large has-text-centered" for="user_name">Username</label>
+          <label className="label is-large has-text-centered" htmlFor="user_name">Username</label>
           <input required className="input has-text-centered is-large is-fullwidth" placeholder="User Name" type="text" name="user_name" onChange={this.updateDetails}/>
         </div>
         <div className="form-row">  
-          <label className="label is-large has-text-centered" for="password">Password</label>
+          <label className="label is-large has-text-centered" htmlFor="password">Password</label>
           <input required className="input has-text-centered is-large is-fullwidth" placeholder="Password" type="password" name="password" onChange={this.updateDetails}/>
         </div>
         <input className="button is-large is-fullwidth is-success" value='Login' type="submit" />

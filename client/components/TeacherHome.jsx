@@ -19,15 +19,10 @@ class TeacherHome extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        const oldStuff = prevProps.pending
-        const newStuff = this.props.pending
+        const oldProps = JSON.stringify(prevProps.pending)
+        const newProps = JSON.stringify(this.props.pending)
 
-        console.log(oldStuff)
-        console.log(newStuff)
-
-        if(JSON.stringify(oldStuff) !== JSON.stringify(newStuff)) {
-            console.log('yes')
-            console.log(JSON.stringify(oldStuff) !== JSON.stringify(newStuff))
+        if(oldProps !== newProps) {
             this.setState({
                 toReview: this.orderSubmissions(this.props.pending),
                 hi: this.state.hi + 1
