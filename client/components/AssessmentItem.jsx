@@ -83,7 +83,7 @@ class AssessmentItem extends React.Component {
                 <h4>{status}</h4>
                 <p>Evidence Submitted:</p>
                 <ul>
-                    {evidence.map(e => <li>{e.evidence}</li>)}
+                    {evidence.map((e, i) => <li key={i}>{e.evidence}</li>)}
                 </ul>
                 {status != 'complete' && this.renderSubmit()}
             </React.Fragment>
