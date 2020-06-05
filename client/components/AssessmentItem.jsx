@@ -72,7 +72,7 @@ class AssessmentItem extends React.Component {
         return (
             <div className="assmt-form">
                 <input type='text' onChange={this.handleTyping} value={this.state.evidence} />
-                <button onClick={this.submit}>Submit</button>
+                <button onClick={this.submit}><i class="fas fa-arrow-right"></i></button>
             </div>
         )
     }

@@ -94,6 +94,21 @@ input, button {
   margin-bottom: .8rem;
 }
 
+.assmt-form {
+  display: flex;
+  justify-content: space-between;
+
+  input {
+    width: 77%;
+  }
+
+  button {
+    background-color: $brand-highlight;
+    border-color: $brand-highlight;
+    color: $text-light;
+    width: 20%;
+  }
+}
 
 // Assmt List
 // ------------
@@ -102,11 +117,15 @@ input, button {
   padding: 1rem;
 
   @include tablet {
-    width: 24%;
+    width: 49%;
     margin: .5%;
     border: 1px solid $border-color;
     padding: 2rem;
     border-radius: .4rem;
+  }
+
+  @include desktop {
+    width: 24%;
   }
 }
 
