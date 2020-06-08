@@ -18,9 +18,9 @@ function getStudentByRecordId (record_id, testDb) {
     const db = testDb || connection
 
     return db('students_assessments')
-        .select('student_id', 'assessment_code', 'status', 'actual_name', 'cohort_id')
+        .select('students.user_id', 'assessment_code', 'status', 'actual_name', 'cohort_id')
         .where('students_assessments.id', record_id)
-        .join('students', 'students_assessments.student_id', 'students.user_id')
+        .join('students', 'students_assessments.user_id', 'students.user_id')
         .first()
 }
 

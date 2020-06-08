@@ -11,7 +11,7 @@ function getStudentInfo (id, testDb) {
 
     return db('students_assessments')
         .select('assessment_code AS code', 'status', 'students_assessments.id AS assessment_record')
-        .where('student_id', id)
+        .where('user_id', id)
 }
 
 module.exports = {
