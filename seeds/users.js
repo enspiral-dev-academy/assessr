@@ -18,6 +18,12 @@ exports.seed = function (knex) {
           user_type: 'student',
           user_name: 'kelly',
           hash: hashSync('kelly', saltRounds)
+        },
+        {
+          id: 3,
+          user_type: 'student',
+          user_name: 'ollie',
+          hash: hashSync('ollie', saltRounds)
         }
       ])
     })

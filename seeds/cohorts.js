@@ -7,7 +7,13 @@ exports.seed = function (knex) {
         {
           id: 31,
           name: 'Hihi',
-          year: 2020,
+          year: 2017,
+          campus: 'Wellington'
+        },
+        {
+          id: 44,
+          name: 'Hihi',
+          year: 2018,
           campus: 'Wellington'
         }
       ])
