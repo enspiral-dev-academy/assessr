@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import AssessmentList from './AssessmentList'
+import AssessmentList from '../shared/AssessmentList'
 
-import { getCompletedAssessments } from '../actions/assessments'
+import { getCompletedAssessments } from '../../actions/assessments'
 
 
 class ModuleList extends React.Component {

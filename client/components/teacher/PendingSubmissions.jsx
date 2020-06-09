@@ -3,16 +3,18 @@ import {connect} from 'react-redux'
 
 import StudentSubmissions from './StudentSubmissions'
 
-import {getAllPending} from '../actions/teacher'
+import {getAllPending} from '../../actions/teacher'
 
 
-class TeacherHome extends React.Component {
+class PendingSubmissions extends React.Component {
     state = {
         toReview: []
     }
 
     componentDidMount = () => {
-        this.props.dispatch(getAllPending())
+        this.setState({
+            toReview: this.orderPending(this.props.pending)
+        }, () => this.props.dispatch(getAllPending()))  
     }
 
     componentDidUpdate = (prevProps) => {
@@ -59,8 +61,6 @@ class TeacherHome extends React.Component {
     render = () => {
         return (
             <div>
-                <h1>W B!</h1>
-                <p>Welcome Back Teacher!</p>
                 <p>Assessments submitted for review:</p>
                 {this.state.toReview.map((record, i) => (
                     <StudentSubmissions key={i} student={record} />
@@ -77,4 +77,4 @@ const mapState2Props = (state) => {
     }
 }
 
-export default connect(mapState2Props)(TeacherHome)
+export default connect(mapState2Props)(PendingSubmissions)

@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
-import {getAllStudents} from '../actions/teacher'
+import {getAllStudents} from '../../actions/teacher'
 
 
 class Students extends React.Component {

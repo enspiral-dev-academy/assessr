@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { submitEvidence } from '../actions/assessments'
+import { submitEvidence } from '../../actions/assessments'
 
 
 class AssessmentItem extends React.Component {

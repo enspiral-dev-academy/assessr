@@ -31,7 +31,7 @@ class Nav extends React.Component {
             {auth.isAuthenticated
               ? <Link to='/' className="navbar-item is-large" onClick={() => logout()}>Logout</Link>
               : [
-                <Link onClick={this.toggleBurger} className="navbar-item is-large" to='/login'>Login</Link>,
+                <Link onClick={this.toggleBurger} className="navbar-item is-large" to='/'>Login</Link>,
                 <Link onClick={this.toggleBurger} className="navbar-item" to='/register'>Register</Link>
               ]
             }
