@@ -8,8 +8,7 @@ import {getAllPending} from '../actions/teacher'
 
 class TeacherHome extends React.Component {
     state = {
-        toReview: [],
-        hi: 0
+        toReview: []
     }
 
     componentDidMount = () => {
@@ -22,8 +21,7 @@ class TeacherHome extends React.Component {
 
         if(oldProps !== newProps) {
             this.setState({
-                toReview: this.orderSubmissions(this.props.pending),
-                hi: this.state.hi + 1
+                toReview: this.orderSubmissions(this.props.pending)
             })
         }
     }
@@ -35,7 +33,7 @@ class TeacherHome extends React.Component {
                 record_id: sub.record_id,
                 assessment_code: sub.assessment_code,
                 status: sub.status,
-                submissions: subs.submissions
+                submissions: sub.submissions
             }
 
             const match = students.find((student) => {
@@ -53,6 +51,7 @@ class TeacherHome extends React.Component {
                 }
                 students.push(student)
             }
+
             return students
         }, [])
     }

@@ -1,6 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+import ReviewSubmission from './ReviewSubmission'
+
 
 class StudentSubmissions extends React.Component {
     state = {
@@ -16,7 +18,7 @@ class StudentSubmissions extends React.Component {
     renderSubmissionList = (student) => {
         return (
             <ul>
-                {student.submissions.map((sub, i) => <li key={i}>{sub.assessment_code}</li>)}
+                {student.submissions.map((sub, i) => <ReviewSubmission submission={sub} key={i} />)}
             </ul>
         )
     }
