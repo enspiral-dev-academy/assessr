@@ -39,14 +39,14 @@ class TeacherHome extends React.Component {
             }
 
             const match = students.find((student) => {
-                return student.student_id == sub.student_id
+                return student.user_id == sub.user_id
             })
 
             if (match) {
                 match.submissions.push(formattedSub)
             } else {
                 const student = {
-                    student_id: sub.student_id,
+                    user_id: sub.user_id,
                     actual_name: sub.actual_name,
                     cohort_id: sub.cohort_id,
                     submissions: [formattedSub]
