@@ -23,7 +23,6 @@ class ReviewSubmission extends React.Component {
 
     render = () => {
         const {submission} = this.props
-        console.log(submission)
         return (
             <>
                 <li onClick={this.toggleEvidence}>{submission.assessment_code}</li>
