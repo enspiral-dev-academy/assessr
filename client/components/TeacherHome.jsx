@@ -21,13 +21,13 @@ class TeacherHome extends React.Component {
 
         if(oldProps !== newProps) {
             this.setState({
-                toReview: this.orderSubmissions(this.props.pending)
+                toReview: this.orderPending(this.props.pending)
             })
         }
     }
 
-    orderSubmissions = (subs) => {
-        return subs.reduce((students, sub) => {
+    orderPending = (pendingSubs) => {
+        return pendingSubs.reduce((students, sub) => {
             
             const formattedSub = {
                 record_id: sub.record_id,
