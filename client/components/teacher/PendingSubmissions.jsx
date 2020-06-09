@@ -29,7 +29,7 @@ class PendingSubmissions extends React.Component {
     }
 
     orderPending = (pendingSubs) => {
-        return pendingSubs.reduce((students, sub) => {
+        let reducedArr = pendingSubs.reduce((students, sub) => {
             
             const formattedSub = {
                 record_id: sub.record_id,
@@ -56,6 +56,17 @@ class PendingSubmissions extends React.Component {
 
             return students
         }, [])
+
+        reducedArr.sort((a,b) => {
+            if (a.actual_name > b.actual_name) {
+                return 1
+            } else if (a.actual_name < b.actual_name) {
+                return -1
+            }
+            return 0
+        })
+
+        return reducedArr
     }
 
     render = () => {
