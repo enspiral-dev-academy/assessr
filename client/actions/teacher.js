@@ -15,6 +15,13 @@ export function saveAllStudents(students) {
     }
 }
 
+export function markAsReviewed(record_id) {
+    return {
+        type: 'HAS_BEEN_REVIEWED',
+        record_id
+    }
+}
+
 export function getAllPending () {
     return dispatch => {
         getPendingSubmissions()
@@ -39,5 +46,19 @@ export function getStudentAssessments (id) {
             .then(assmts => {
                 dispatch(saveAllCompleted(assmts))
             })
+    }
+}
+
+export function assmtCompleted (record_id) {
+    return dispatch => {
+        // TODO: the database part
+        dispatch(markAsReviewed(record_id))
+    }
+}
+
+export function reviewedButIncomplete (record_id, reviewedEvidenceIds) {
+    return dispatch => {
+        // TODO: the database part
+        dispatch(markAsReviewed(record_id))
     }
 }
