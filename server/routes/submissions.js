@@ -1,8 +1,10 @@
 const router = require('express').Router()
 // const verifyJwt = require('express-jwt')
 
-const db = require('../db/submissions')
 const { decode } = require('../auth/token')
+const db = require('../db/submissions')
+const assmtDb = require('../db/assessments')
+
 
 router.get('/', decode, (req, res) => {
     const {user_type} = req.user
@@ -39,10 +41,11 @@ router.patch('/done/:id', decode, (req, res) => {
     if(user_type != 'teacher') {
         res.json({})
     } else {
-        console.log('Record ' + req.params.id + ' is complete')
-        // TODO: mark as complete -> student_assessments
-        // TODO: mark all as reviewed -> submissions
-        res.json({})
+        const {id} = req.params
+        assmtDb.markAsComplete(id)
+            .then(() => db.markAllReviewed(id))
+            .then(() => res.json({})) 
+        // TODO: work out what to res.json back
     }
 })
 

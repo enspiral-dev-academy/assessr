@@ -49,11 +49,20 @@ function saveSubmission (submission, testDb) {
         .insert(submission, 'id')
 }
 
+function markAsComplete (id, testDb){
+    const db = testDb || connection
+
+    return db('students_assessments')
+        .where('id', id)
+        .update({ status: 'complete' })
+}
+
 module.exports = {
     getAllAssessments,
     getAllModules,
     getUserAssessments,
     getUserAssessment,
     createRecord,
-    saveSubmission
+    saveSubmission,
+    markAsComplete
 }

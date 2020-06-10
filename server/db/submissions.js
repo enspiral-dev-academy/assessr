@@ -24,8 +24,17 @@ function getStudentByRecordId (record_id, testDb) {
         .first()
 }
 
+function markAllReviewed(id, testDb) {
+    const db = testDb || connection
+
+    return db('submissions')
+        .where('student_assessment_id', id)
+        .update({ reviewed: true })
+}
+
 module.exports = {
     getPendingSubmissions,
     getSubmissionByRecordId,
-    getStudentByRecordId
+    getStudentByRecordId,
+    markAllReviewed
 }
