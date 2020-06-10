@@ -34,4 +34,16 @@ router.get('/', decode, (req, res) => {
     }
 })
 
+router.patch('/done/:id', decode, (req, res) => {
+    const {user_type} = req.user
+    if(user_type != 'teacher') {
+        res.json({})
+    } else {
+        console.log('Record ' + req.params.id + ' is complete')
+        // TODO: mark as complete -> student_assessments
+        // TODO: mark all as reviewed -> submissions
+        res.json({})
+    }
+})
+
 module.exports = router

@@ -19,3 +19,9 @@ export function getStudentInfo(id) {
         .set({ 'Authorization': `Bearer ${getUserToken()}` })
         .then(res => res.body)
 }
+
+export function markAsComplete(id) {
+    return request.patch('/api/submissions/done/' + id)
+        .set({ 'Authorization': `Bearer ${getUserToken()}` })
+        .then(res => res.body)
+}

@@ -1,4 +1,4 @@
-import { getPendingSubmissions, getStudents, getStudentInfo } from '../apis/teacher'
+import { getPendingSubmissions, getStudents, getStudentInfo, markAsComplete } from '../apis/teacher'
 import { saveAllCompleted } from './assessments'
 
 export function saveAllPending(pending) {
@@ -49,10 +49,12 @@ export function getStudentAssessments (id) {
     }
 }
 
-export function assmtCompleted (record_id) {
+export function assmtCompleted (id) {
     return dispatch => {
-        // TODO: the database part
-        dispatch(markAsReviewed(record_id))
+        markAsComplete(id)
+            .then(() => {
+                dispatch(markAsReviewed(id))
+            })
     }
 }
 
