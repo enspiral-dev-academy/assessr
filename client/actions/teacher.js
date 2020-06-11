@@ -1,4 +1,4 @@
-import { getPendingSubmissions, getStudents, getStudentInfo, markAsComplete } from '../apis/teacher'
+import { getPendingSubmissions, getStudents, getStudentInfo, markAsComplete, markSubmissionsReviewed } from '../apis/teacher'
 import { saveAllCompleted } from './assessments'
 
 export function saveAllPending(pending) {
@@ -60,7 +60,9 @@ export function assmtCompleted (id) {
 
 export function reviewedButIncomplete (record_id, reviewedEvidenceIds) {
     return dispatch => {
-        // TODO: the database part
-        dispatch(markAsReviewed(record_id))
+        markSubmissionsReviewed(record_id, reviewedEvidenceIds)
+            .then(() => {
+                dispatch(markAsReviewed(record_id))
+            })
     }
 }

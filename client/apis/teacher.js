@@ -25,3 +25,10 @@ export function markAsComplete(id) {
         .set({ 'Authorization': `Bearer ${getUserToken()}` })
         .then(res => res.body)
 }
+
+export function markSubmissionsReviewed(id, reviewedEvidenceIds) {
+    return request.patch('/api/submissions/reviewed/' + id)
+        .set({ 'Authorization': `Bearer ${getUserToken()}` })
+        .send(reviewedEvidenceIds)
+        .then(res => res.body)
+}

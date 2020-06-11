@@ -41,10 +41,27 @@ router.patch('/done/:id', decode, (req, res) => {
     if(user_type != 'teacher') {
         res.json({})
     } else {
-        const {id} = req.params
-        assmtDb.markAsComplete(id)
-            .then(() => db.markAllReviewed(id))
+        const record_id = req.params.id
+        assmtDb.markAsComplete(record_id)
+            .then(() => db.markAllReviewed(record_id))
             .then(() => res.json({})) 
+        // TODO: work out what to res.json back
+    }
+})
+
+router.patch('/reviewed/:id', decode, (req, res) => {
+    const {user_type} = req.user
+    if(user_type != 'teacher') {
+        res.json({})
+    } else {
+        const record_id = req.params.id
+        const idArr = req.body
+
+        console.log('id', record_id)
+        console.log('ids', idArr)
+        res.json({})
+        // mark as reviewed
+	    // if no more to review, mark as in progress
         // TODO: work out what to res.json back
     }
 })
