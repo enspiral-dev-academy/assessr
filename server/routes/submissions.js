@@ -56,13 +56,17 @@ router.patch('/reviewed/:id', decode, (req, res) => {
     } else {
         const record_id = req.params.id
         const idArr = req.body
+        const markAllReviewed = idArr.map(id => db.markOneReviewed(id))
 
-        console.log('id', record_id)
-        console.log('ids', idArr)
-        res.json({})
-        // mark as reviewed
-	    // if no more to review, mark as in progress
-        // TODO: work out what to res.json back
+        Promise.all(markAllReviewed)
+            .then(() => db.getIncompleteByRecordId(record_id))
+            .then(itemsStillToReview => {
+                if(itemsStillToReview.length == 0) {
+                    return assmtDb.markAsInProgress(record_id)
+                }
+            })
+            .then(() => res.json({})) 
+            // TODO: work out what to res.json back
     }
 })
 

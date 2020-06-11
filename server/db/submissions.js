@@ -14,6 +14,14 @@ function getSubmissionByRecordId (record_id, testDb) {
         .where('student_assessment_id', record_id)
 }
 
+function getIncompleteByRecordId (record_id, testDb) {
+    const db = testDb || connection
+
+    return db('submissions')
+        .where('student_assessment_id', record_id)
+        .andWhere('reviewed', false)
+}
+
 function getStudentByRecordId (record_id, testDb) {
     const db = testDb || connection
 
@@ -32,9 +40,19 @@ function markAllReviewed(id, testDb) {
         .update({ reviewed: true })
 }
 
+function markOneReviewed(id, testDb) {
+    const db = testDb || connection
+
+    return db('submissions')
+        .where('id', id)
+        .update({ reviewed: true })
+}
+
 module.exports = {
     getPendingSubmissions,
     getSubmissionByRecordId,
+    getIncompleteByRecordId,
     getStudentByRecordId,
-    markAllReviewed
+    markAllReviewed,
+    markOneReviewed
 }

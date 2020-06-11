@@ -57,6 +57,14 @@ function markAsComplete (id, testDb){
         .update({ status: 'complete' })
 }
 
+function markAsInProgress (id, testDb){
+    const db = testDb || connection
+
+    return db('students_assessments')
+        .where('id', id)
+        .update({ status: 'in progress' })
+}
+
 module.exports = {
     getAllAssessments,
     getAllModules,
@@ -64,5 +72,6 @@ module.exports = {
     getUserAssessment,
     createRecord,
     saveSubmission,
-    markAsComplete
+    markAsComplete,
+    markAsInProgress
 }
