@@ -20,12 +20,24 @@ export function isAuthenticated () {
 }
 
 export function isTeacher () {
+  return checkUserTypeIs('teacher')
+}
+
+export function isStudent () {
+  return checkUserTypeIs('student')
+}
+
+export function isNoOne () {
+  return checkUserTypeIs(null)
+}
+
+export function checkUserTypeIs (type) {
   const token = get('token')
 
   if (token) {
     const payload = decode(token)
     const role = payload.user_type
-    return role == 'teacher'
+    return role == type
   }
   
   return false
