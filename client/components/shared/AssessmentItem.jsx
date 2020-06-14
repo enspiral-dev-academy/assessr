@@ -61,7 +61,8 @@ class AssessmentItem extends React.Component {
         })
     }
 
-    submit = () => {
+    submit = evt => {
+        evt.preventDefault()
         this.props.dispatch(submitEvidence(this.props.assessment.code, this.state.evidence))
         this.setState({
             evidence: ""
@@ -70,10 +71,10 @@ class AssessmentItem extends React.Component {
 
     renderSubmit = () => {
         return (
-            <div className="assmt-form">
+            <form className="assmt-form" onSubmit={this.submit}>
                 <input type='text' onChange={this.handleTyping} value={this.state.evidence} />
-                <button onClick={this.submit}>Submit</button>
-            </div>
+                <button>Submit</button>
+            </form>
         )
     }
 
