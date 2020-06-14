@@ -33,7 +33,7 @@ class Login extends React.Component {
         {auth.errorMessage && <span className="has-text-danger is-large">{auth.errorMessage}</span>}
         <div className="form-row">  
           <label className="label is-large has-text-centered" htmlFor="user_name">Username</label>
-          <input required className="input has-text-centered is-large is-fullwidth" placeholder="User Name" type="text" name="user_name" onChange={this.updateDetails}/>
+          <input required className="input has-text-centered is-large is-fullwidth" placeholder="Username" type="text" name="user_name" onChange={this.updateDetails}/>
         </div>
         <div className="form-row">  
           <label className="label is-large has-text-centered" htmlFor="password">Password</label>
