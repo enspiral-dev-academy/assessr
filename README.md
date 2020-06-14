@@ -44,7 +44,7 @@ As a teacher user:
 - [ ] I want to be able to classify a new user as student or teacher
 - [ ] I want to be able to match a new student user to their records
 - [x] I want to see a list of submitted links
-- [ ] I want to be able to tick a given assessment off for a student
+- [x] I want to be able to tick a given assessment off for a student
 - [ ] I want to be able to add a comment as to what is missing on an assessment after reviewing a submission
 - [ ] I want to see a list of current students
 - [x] I want to be able to see a specific student's assessment progress
