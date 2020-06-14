@@ -10,7 +10,6 @@ class ReviewSubmission extends React.Component {
     }
 
     submitComplete = () => {
-        console.log('dispatch yay @ everything')
         this.props.dispatch(assmtCompleted(this.props.submission.record_id))
     }
 
@@ -18,7 +17,6 @@ class ReviewSubmission extends React.Component {
         const {submission} = this.props
         const reviewedIds = submission.submissions.map(s => s.id)
 
-        console.log('dispatch reviewed pieces')
         this.props.dispatch(reviewedButIncomplete(submission.record_id, reviewedIds))
     }
 
