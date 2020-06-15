@@ -1,7 +1,18 @@
 const router = require('express').Router()
 
-const { userExists, createUser } = require('../db/users')
+const { userExists, createUser, getNewUsers } = require('../db/users')
 const token = require('../auth/token')
+
+
+router.get('/users', token.decode, (req, res) => {
+  const {user_type} = req.user
+  if(user_type != 'teacher') {
+      res.json({})
+  } else {
+      getNewUsers()
+          .then(users => res.json(users))
+  }
+})
 
 router.post('/register', register, token.issue)
 

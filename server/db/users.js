@@ -28,8 +28,16 @@ function getUserByUsername (user_name, testDb) {
     .first()
 }
 
+function getNewUsers (testDb) {
+  const db = testDb || connection
+
+  return db('users')
+    .where('user_type', null)
+}
+
 module.exports = {
   createUser,
   userExists,
-  getUserByUsername
+  getUserByUsername,
+  getNewUsers
 }

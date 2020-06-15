@@ -32,3 +32,9 @@ export function markSubmissionsReviewed(id, reviewedEvidenceIds) {
         .send(reviewedEvidenceIds)
         .then(res => res.body)
 }
+
+export function getNewUsers() {
+    return request.get('/api/auth/users')
+        .set({ 'Authorization': `Bearer ${getUserToken()}` })
+        .then(res => res.body)
+}
