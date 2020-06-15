@@ -97,8 +97,8 @@ class AssessmentItem extends React.Component {
         const evidence = this.findEvidence(this.props.completed)
 
         return (
-            <article className={`assmt ${this.getColour(status)}`} onClick={this.toggleMore}>
-                <p>{assmt.code}: {assmt.title}</p>
+            <article className={`assmt ${this.getColour(status)}`}>
+                <p onClick={this.toggleMore}>{assmt.code}: {assmt.title}</p>
                 {this.state.showMore && this.renderMore(status, evidence)}
             </article>
         )
