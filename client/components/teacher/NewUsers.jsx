@@ -17,7 +17,7 @@ class NewUsers extends React.Component {
         return (
             <div>
                 <p>Look at these fresh faces!</p>
-                {this.state.users.map(user => <p>{user.user_name}</p>)}            
+                {this.state.users.map((user, i) => <p key={i}>{user.user_name}</p>)}            
             </div>
         )
     }
