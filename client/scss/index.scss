@@ -112,9 +112,23 @@ input, button {
 
 // Assmt List
 // ------------
+.assmt-row {
+
+  @include tablet {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+}
+
 .assmt {
   border-bottom: 1px solid $border-color;
   padding: 1rem;
+  transition: all ease .3s;
+
+  &:hover {
+    background-color: $border-color;
+  }
 
   @include tablet {
     width: 49%;
@@ -126,15 +140,6 @@ input, button {
 
   @include desktop {
     width: 24%;
-  }
-}
-
-.assmt-row {
-
-  @include tablet {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 3rem;
   }
 }
 
