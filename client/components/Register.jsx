@@ -35,6 +35,11 @@ class Register extends React.Component {
         <h1 className="title is-2">Register</h1>
         <hr />
         {auth.errorMessage && <span className="has-text-danger is-large">{auth.errorMessage}</span>}
+
+        <div className="form-row"> 
+          <label className="column is-6 label is-large has-text-centered" htmlFor="actual_name">Full Name</label>
+          <input required className="input is-large has-text-centered is-fullwidth" placeholder="Full Name" type="text" name="actual_name" onChange={this.updateDetails}/>
+        </div>
          <div className="form-row"> 
           <label className="column is-6 is-offset-one-quarter label is-large has-text-centered" htmlFor="user_name">Username</label>
           <input required className="input is-large has-text-centered is-fullwidth" placeholder="Username" type="text" name="user_name" onChange={this.updateDetails}/>
