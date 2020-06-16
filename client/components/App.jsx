@@ -15,23 +15,15 @@ import {isAuthenticated, isTeacher, isStudent, isNoOne} from '../utils/auth'
 export function App({auth}) {
   return (
     <Router>
-      <div className="container has-text-centered">
-
-        <div className="hero is-small is-primary">
-          <div className="hero-body has-text-centered">
-            <Link to='/' className="">
-              <h1 className="title is-1">Assessr</h1>
-            </Link>
-            <Nav />
-          </div>
-        </div>
-
+      <Nav />
+      <div className="container has-text-centered">  
         <div className=''>
           {!isAuthenticated() && (
             <>
             <Route exact path="/" component={Login} />
             <Route path="/register" component={Register} />
             </>
+
           )}
           {isStudent() && <StudentHome />}
           {isTeacher() && <TeacherHome />}
