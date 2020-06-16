@@ -29,6 +29,7 @@ function getStudentByRecordId (record_id, testDb) {
         .select('students.user_id', 'assessment_code', 'status', 'actual_name', 'cohort_id')
         .where('students_assessments.id', record_id)
         .join('students', 'students_assessments.user_id', 'students.user_id')
+        .join('users', 'students.user_id', 'users.id')
         .first()
 }
 

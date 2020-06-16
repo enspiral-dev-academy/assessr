@@ -4,6 +4,8 @@ function getAllStudents (testDb) {
     const db = testDb || connection
 
     return db('students')
+        .select('students.*', 'actual_name')
+        .join('users', 'students.user_id', 'users.id') 
 }
 
 function getStudentInfo (id, testDb) {
