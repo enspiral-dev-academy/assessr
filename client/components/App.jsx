@@ -19,10 +19,10 @@ export function App({auth}) {
       <div className="container has-text-centered">  
         <div className=''>
           {!isAuthenticated() && (
-            <React.Fragment>
+            <>
             <Route exact path="/" component={Login} />
             <Route path="/register" component={Register} />
-            </React.Fragment>
+            </>
 
           )}
           {isStudent() && <StudentHome />}
