@@ -14,18 +14,45 @@ function getSubmissionByRecordId (record_id, testDb) {
         .where('student_assessment_id', record_id)
 }
 
+function getIncompleteByRecordId (record_id, testDb) {
+    const db = testDb || connection
+
+    return db('submissions')
+        .where('student_assessment_id', record_id)
+        .andWhere('reviewed', false)
+}
+
 function getStudentByRecordId (record_id, testDb) {
     const db = testDb || connection
 
     return db('students_assessments')
-        .select('student_id', 'assessment_code', 'status', 'actual_name', 'cohort_id')
+        .select('students.user_id', 'assessment_code', 'status', 'actual_name', 'cohort_id')
         .where('students_assessments.id', record_id)
-        .join('students', 'students_assessments.student_id', 'students.user_id')
+        .join('students', 'students_assessments.user_id', 'students.user_id')
         .first()
+}
+
+function markAllReviewed(id, testDb) {
+    const db = testDb || connection
+
+    return db('submissions')
+        .where('student_assessment_id', id)
+        .update({ reviewed: true })
+}
+
+function markOneReviewed(id, testDb) {
+    const db = testDb || connection
+
+    return db('submissions')
+        .where('id', id)
+        .update({ reviewed: true })
 }
 
 module.exports = {
     getPendingSubmissions,
     getSubmissionByRecordId,
-    getStudentByRecordId
+    getIncompleteByRecordId,
+    getStudentByRecordId,
+    markAllReviewed,
+    markOneReviewed
 }

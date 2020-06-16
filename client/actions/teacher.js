@@ -1,4 +1,4 @@
-import { getPendingSubmissions, getStudents, getStudentInfo } from '../apis/teacher'
+import { getPendingSubmissions, getStudents, getStudentInfo, markAsComplete, markSubmissionsReviewed } from '../apis/teacher'
 import { saveAllCompleted } from './assessments'
 
 export function saveAllPending(pending) {
@@ -12,6 +12,13 @@ export function saveAllStudents(students) {
     return {
         type: 'SAVE_ALL_STUDENTS',
         students
+    }
+}
+
+export function markAsReviewed(record_id) {
+    return {
+        type: 'HAS_BEEN_REVIEWED',
+        record_id
     }
 }
 
@@ -38,6 +45,24 @@ export function getStudentAssessments (id) {
         getStudentInfo(id)
             .then(assmts => {
                 dispatch(saveAllCompleted(assmts))
+            })
+    }
+}
+
+export function assmtCompleted (id) {
+    return dispatch => {
+        markAsComplete(id)
+            .then(() => {
+                dispatch(markAsReviewed(id))
+            })
+    }
+}
+
+export function reviewedButIncomplete (record_id, reviewedEvidenceIds) {
+    return dispatch => {
+        markSubmissionsReviewed(record_id, reviewedEvidenceIds)
+            .then(() => {
+                dispatch(markAsReviewed(record_id))
             })
     }
 }

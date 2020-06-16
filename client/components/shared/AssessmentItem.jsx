@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { submitEvidence } from '../actions/assessments'
+import { submitEvidence } from '../../actions/assessments'
 
 
 class AssessmentItem extends React.Component {
@@ -61,7 +61,8 @@ class AssessmentItem extends React.Component {
         })
     }
 
-    submit = () => {
+    submit = evt => {
+        evt.preventDefault()
         this.props.dispatch(submitEvidence(this.props.assessment.code, this.state.evidence))
         this.setState({
             evidence: ""
@@ -70,10 +71,10 @@ class AssessmentItem extends React.Component {
 
     renderSubmit = () => {
         return (
-            <div className="assmt-form">
+            <form className="assmt-form" onSubmit={this.submit}>
                 <input type='text' onChange={this.handleTyping} value={this.state.evidence} />
                 <button onClick={this.submit}><i class="fas fa-arrow-right"></i></button>
-            </div>
+            </form>
         )
     }
 
@@ -83,7 +84,7 @@ class AssessmentItem extends React.Component {
                 <h4>{status}</h4>
                 <p>Evidence Submitted:</p>
                 <ul>
-                    {evidence.map(e => <li>{e.evidence}</li>)}
+                    {evidence.map((e, i) => <li key={i}>{e.evidence}</li>)}
                 </ul>
                 {status != 'complete' && this.renderSubmit()}
             </React.Fragment>

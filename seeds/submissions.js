@@ -15,6 +15,12 @@ exports.seed = function (knex) {
             student_assessment_id: 1,
             evidence: 'url with all the stuff working',
             reviewed: true
+          },
+          {
+            id: 3,
+            student_assessment_id: 4,
+            evidence: "i'm a sassy goose",
+            reviewed: false
           }
         ])
       })

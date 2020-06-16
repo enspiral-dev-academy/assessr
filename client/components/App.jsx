@@ -5,35 +5,29 @@ import {connect} from 'react-redux'
 import Login from './Login'
 import Register from './Register'
 import Nav from './Nav'
-import ModuleList from './ModuleList'
-import TeacherHome from './TeacherHome'
-import Students from './Students'
-import StudentView from './StudentView'
+import StudentHome from './student/StudentHome'
+import TeacherHome from './teacher/TeacherHome'
+import AwaitingConfirmation from './AwaitingConfirmation'
 
-import {isAuthenticated, isTeacher} from '../utils/auth'
+import {isAuthenticated, isTeacher, isStudent, isNoOne} from '../utils/auth'
 
 
 export function App({auth}) {
   return (
     <Router>
       <Nav />
-      <div className="container has-text-centered">
-        
-  
+      <div className="container has-text-centered">  
         <div className=''>
-          {isAuthenticated() ? 
-            <Route exact path="/" component={isTeacher() ? TeacherHome : ModuleList} />
-            :
-            <Route exact path="/" component={Login} />
-          }
-          {isAuthenticated() && isTeacher() && (
+          {!isAuthenticated() && (
             <React.Fragment>
-              <Route exact path="/students" component={Students} />
-              <Route path="/students/:id" component={StudentView} />
+            <Route exact path="/" component={Login} />
+            <Route path="/register" component={Register} />
             </React.Fragment>
+
           )}
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
+          {isStudent() && <StudentHome />}
+          {isTeacher() && <TeacherHome />}
+          {isNoOne() && <AwaitingConfirmation />}
         </div>
 
       </div>

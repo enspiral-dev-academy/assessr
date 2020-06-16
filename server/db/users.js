@@ -7,7 +7,8 @@ function createUser (user_name, password, testDb) {
 
   return generatePasswordHash(password)
     .then(hash => {
-      return db('users').insert({user_name, hash})
+      return db('users')
+        .insert({user_name, hash}, 'id')
     })
 }
 
@@ -27,8 +28,16 @@ function getUserByUsername (user_name, testDb) {
     .first()
 }
 
+function getNewUsers (testDb) {
+  const db = testDb || connection
+
+  return db('users')
+    .where('user_type', null)
+}
+
 module.exports = {
   createUser,
   userExists,
-  getUserByUsername
+  getUserByUsername,
+  getNewUsers
 }

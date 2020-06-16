@@ -4,8 +4,18 @@
 
 Making a site where students can view their progress towards assessments, submit assessments, and where teachers can view the progress of the cohort and review work.
 
+[Currently deployed version](https://everybody-does-assessments.herokuapp.com)
+
 
 ## Setup
+
+Create a `.env` file in the main directory and add:
+
+```sh
+JWT_SECRET="something super secret that you come up with"
+```
+
+Feel free to add an appropriately personal secret.
 
 Run the following commands in your terminal:
 
@@ -15,6 +25,8 @@ npx knex migrate:latest
 npx knex seed:run
 npm run dev
 ```
+
+The site should then be available on http://localhost:3000
 
 ## User Stories
 
@@ -32,11 +44,10 @@ As a teacher user:
 - [ ] I want to be able to classify a new user as student or teacher
 - [ ] I want to be able to match a new student user to their records
 - [x] I want to see a list of submitted links
-- [ ] I want to be able to tick a given assessment off for a student
-- [ ] I want to see a list of students
-- [ ] I want to be able to see a specific student's assessment progress
-- [ ] I want to be able to sort a student's completed work by completed vs incompleted
-- [ ] I want to be able to see assessment progress for the entire cohort
+- [x] I want to be able to tick a given assessment off for a student
+- [ ] I want to be able to add a comment as to what is missing on an assessment after reviewing a submission
+- [ ] I want to see a list of current students
+- [x] I want to be able to see a specific student's assessment progress
 - [ ] I want to be able to access json of current assessment data
 - [ ] I want to be able to provide json data of students assessments to be included in the database
 - [ ] I want to be able to add evidence for a given student's assessment
@@ -48,14 +59,17 @@ As a student user:
 - [ ] I want to be able to see what pieces are necessary to complete a given assessment
 - [ ] I want to be able to see what pieces of an assessment I have completed
 - [ ] I want to see which pieces are still necessary for this assessment when submitting
+- [ ] I want to be able to submit reflections for the Human Skills assessments via the site
 
 As a teacher user:
 - [ ] I want to be able to tick a student off for specific parts of an assessment
+- [ ] I want to be able to sort a student's completed work by complete vs incomplete
+- [ ] I want to be able to see assessment progress for the entire cohort
 - [ ] I want to be able to download a transcript of the cohorts results
+- [ ] I want to be able to see results for previous students/cohorts
+- [ ] I want to be able to view current foundations students separate from bootcamp students
 - [ ] Graphs!
-- [ ] I want to be able to add a comment as to what is missing on an assessment after reviewing a submission
 
-  ---
 
 ## Views
   | name | user | purpose |
@@ -97,6 +111,7 @@ const modules = [
   {
     id: 1,
     title: 'Foundations: Tech',
+    prefix: 'FT',
     course: 'Foundations',
     assessments: [
       {

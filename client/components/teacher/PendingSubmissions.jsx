@@ -3,17 +3,18 @@ import {connect} from 'react-redux'
 
 import StudentSubmissions from './StudentSubmissions'
 
-import {getAllPending} from '../actions/teacher'
+import {getAllPending} from '../../actions/teacher'
 
 
-class TeacherHome extends React.Component {
+class PendingSubmissions extends React.Component {
     state = {
-        toReview: [],
-        hi: 0
+        toReview: []
     }
 
     componentDidMount = () => {
-        this.props.dispatch(getAllPending())
+        this.setState({
+            toReview: this.orderPending(this.props.pending)
+        }, () => this.props.dispatch(getAllPending()))  
     }
 
     componentDidUpdate = (prevProps) => {
@@ -22,46 +23,55 @@ class TeacherHome extends React.Component {
 
         if(oldProps !== newProps) {
             this.setState({
-                toReview: this.orderSubmissions(this.props.pending),
-                hi: this.state.hi + 1
+                toReview: this.orderPending(this.props.pending)
             })
         }
     }
 
-    orderSubmissions = (subs) => {
-        return subs.reduce((students, sub) => {
+    orderPending = (pendingSubs) => {
+        let reducedArr = pendingSubs.reduce((students, sub) => {
             
             const formattedSub = {
                 record_id: sub.record_id,
                 assessment_code: sub.assessment_code,
                 status: sub.status,
-                submissions: subs.submissions
+                submissions: sub.submissions
             }
 
             const match = students.find((student) => {
-                return student.student_id == sub.student_id
+                return student.user_id == sub.user_id
             })
 
             if (match) {
                 match.submissions.push(formattedSub)
             } else {
                 const student = {
-                    student_id: sub.student_id,
+                    user_id: sub.user_id,
                     actual_name: sub.actual_name,
                     cohort_id: sub.cohort_id,
                     submissions: [formattedSub]
                 }
                 students.push(student)
             }
+
             return students
         }, [])
+
+        reducedArr.sort((a,b) => {
+            if (a.actual_name > b.actual_name) {
+                return 1
+            } else if (a.actual_name < b.actual_name) {
+                return -1
+            }
+            return 0
+        })
+
+        return reducedArr
     }
 
     render = () => {
         return (
             <div>
-                <h1>W B!</h1>
-                <p>Welcome Back Teacher!</p>
                 <p>Assessments submitted for review:</p>
                 {this.state.toReview.map((record, i) => (
                     <StudentSubmissions key={i} student={record} />
@@ -78,4 +88,4 @@ const mapState2Props = (state) => {
     }
 }
 
-export default connect(mapState2Props)(TeacherHome)
+export default connect(mapState2Props)(PendingSubmissions)
