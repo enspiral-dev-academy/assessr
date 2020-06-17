@@ -19,6 +19,44 @@ class ConfirmUser extends React.Component {
         })
     }
 
+    renderStudent = () => {
+        // TODO: Set student info (get cohort list for dropdown)
+        return (
+            <>
+                <p>A student you say, how novel!</p>
+            </>
+        )
+    }  
+
+    renderTeacher = () => {
+        // TODO: Set teacher info (get campuses?)
+        return (
+            <>
+                <p>A teacher? Oh my! Prepare to welcome them to the ranks</p>
+            </>
+        )
+    }  
+
+    renderDelete = () => {
+        // TODO: Confirm button then remove the record
+        return (
+            <>
+                <p>Are you sure you want to delete this person????</p>
+                <button onClick={() => console.log('boop')}>Yes I'm sure!</button>
+            </>
+        )
+    }
+
+    renderForms = (userType) => {
+        return (
+            <>
+                {userType == 'student' && this.renderStudent()}
+                {userType == 'teacher' && this.renderTeacher()}
+                {userType == 'delete' && this.renderDelete()}
+            </>
+        )
+    }
+
     renderButtons = () => {
         return (
             <>
@@ -29,21 +67,6 @@ class ConfirmUser extends React.Component {
         )
     }
 
-    renderStudent = () => {
-        // TODO: Set student info (get cohort list for dropdown)
-        return <p>Student</p>
-    }  
-
-    renderTeacher = () => {
-        // TODO: Set teacher info (get campuses?)
-        return <p>Teacher</p>
-    }  
-
-    renderDelete = () => {
-        // TODO: Confirm button then remove the record
-        return <p>Delete</p>
-    }
-
     render = () => {
         const {user} = this.props
         return (
@@ -51,10 +74,8 @@ class ConfirmUser extends React.Component {
                 <p onClick={this.toggleForm}>{user.actual_name}</p>
                 
                 {this.state.showForm && this.renderButtons()}
-
-                {this.state.userType == 'student' && this.renderStudent()}
-                {this.state.userType == 'teacher' && this.renderTeacher()}
-                {this.state.userType == 'delete' && this.renderDelete()}
+                {this.state.showForm && this.renderForms(this.state.userType)}
+                
             </div>
         )
     }
