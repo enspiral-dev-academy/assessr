@@ -17,7 +17,7 @@ class Nav extends React.Component {
               ? <Link to='/' className="navbar-item" onClick={() => logout()}>Logout</Link>
               : (
                 <>
-                  <Link className="navbar-item" to='/login'>Login</Link>
+                  <Link className="navbar-item" to='/'>Login</Link>
                   <Link className="navbar-item" to='/register'>Register</Link>
                 </>
               )
