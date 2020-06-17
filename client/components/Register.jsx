@@ -4,11 +4,13 @@ import {connect} from 'react-redux'
 import {registerUserRequest} from '../actions/register'
 import {loginError} from '../actions/login'
 
+function capitalise(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
 class Register extends React.Component {
   state = {
-    user_name: '',
-    password: '',
-    confirm_password: ''
+    user_type: capitalise(this.props.match.params.type)
   }
 
   // TODO: Make dynamic based on database (as cohort names may change)
@@ -28,9 +30,11 @@ class Register extends React.Component {
 
   submit = (e) => {
     e.preventDefault()
-    e.target.reset()
-    let {password, confirm_password} = this.state
+    let {password, confirm_password, user_type, cohort} = this.state
     if (confirm_password != password) return this.props.dispatch(loginError("Passwords don't match"))
+    if (user_type == 'student' && cohort == undefined) return this.props.dispatch(loginError("Please choose a cohort"))
+    
+    e.target.reset()
     // TODO: update this process to deal with new info
     this.props.dispatch(registerUserRequest(this.state)) 
   }
@@ -40,8 +44,8 @@ class Register extends React.Component {
     return (
       <div>
         Which cohort are you enrolled in?
-        <select name="cohort" defaultValue="none" onChange={this.updateDetails}>
-            <option disabled value="none"> -- select an option -- </option>
+        <select required name="cohort" defaultValue="" onChange={this.updateDetails}>
+            <option disabled value=""> -- select an option -- </option>
             {cohorts.map((cohort, i) => (
               <option key={i} value={cohort}>{cohort}</option>
             ))}
@@ -52,10 +56,10 @@ class Register extends React.Component {
 
   render = () => {
     const {auth} = this.props
-    const isStudentPage = this.props.match.params.type == 'student'
+    const isStudentPage = this.state.user_type == 'student'
     return (
       <form className="center-form Register form box" onSubmit={this.submit}>
-        <h1 className="title is-2">Register</h1>
+        <h1 className="title is-2">{this.state.user_type} Register</h1>
         <hr />
         {auth.errorMessage && <span className="has-text-danger is-large">{auth.errorMessage}</span>}
 
@@ -77,8 +81,8 @@ class Register extends React.Component {
         </div>
         <div>
           {isStudentPage ? "Which campus are you studying at?" : "What is your primary campus?"}
-          <select name="campus" defaultValue="none" onChange={this.updateDetails}>
-            <option disabled value="none"> -- select an option -- </option>
+          <select required name="campus" defaultValue="" onChange={this.updateDetails}>
+            <option disabled value=""> -- select an option -- </option>
             <option value="Auckland">Auckland - Love that commute</option>
             <option value="Wellington">Wellington - That wind tho</option>
             <option value="Online">Online - PJ's all day</option>
