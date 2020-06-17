@@ -31,7 +31,8 @@ class Register extends React.Component {
     e.target.reset()
     let {password, confirm_password} = this.state
     if (confirm_password != password) return this.props.dispatch(loginError("Passwords don't match"))
-    this.props.dispatch(registerUserRequest(this.state))
+    // TODO: update this process to deal with new info
+    this.props.dispatch(registerUserRequest(this.state)) 
   }
 
   renderStudentPart = (campus) => {
