@@ -24,6 +24,9 @@ class ConfirmUser extends React.Component {
         return (
             <>
                 <p>A student you say, how novel!</p>
+                
+                <p>What is their airtable ID?</p>
+                <input type="text" name="student_id" />
             </>
         )
     }  

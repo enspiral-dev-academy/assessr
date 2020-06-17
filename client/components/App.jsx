@@ -1,8 +1,9 @@
 import React from 'react'
-import {HashRouter as Router, Route, Link} from 'react-router-dom'
+import {HashRouter as Router, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 import Login from './Login'
+import WhatType from './WhatType'
 import Register from './Register'
 import Nav from './Nav'
 import StudentHome from './student/StudentHome'
@@ -21,7 +22,8 @@ export function App({auth}) {
           {!isAuthenticated() && (
             <>
             <Route exact path="/" component={Login} />
-            <Route path="/register" component={Register} />
+            <Route exact path='/register' component={WhatType} />
+            <Route path="/register/:type" component={Register} />
             </>
 
           )}
