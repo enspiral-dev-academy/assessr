@@ -19,6 +19,17 @@ export function isAuthenticated () {
   }
 }
 
+export function registrationIsPending () {
+  const token = get('token')
+
+  if (token) {
+    const payload = decode(token)
+    return !payload.registration_confirmed
+  }
+  
+  return false
+}
+
 export function isTeacher () {
   return checkUserTypeIs('teacher')
 }
@@ -37,7 +48,8 @@ export function checkUserTypeIs (type) {
   if (token) {
     const payload = decode(token)
     const role = payload.user_type
-    return role == type
+    const confirmed = payload.registration_confirmed
+    return confirmed && role == type
   }
   
   return false

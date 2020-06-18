@@ -10,7 +10,7 @@ function capitalise(string) {
 
 class Register extends React.Component {
   state = {
-    user_type: capitalise(this.props.match.params.type)
+    user_type: this.props.match.params.type
   }
 
   // TODO: Make dynamic based on database (as cohort names may change)
@@ -59,7 +59,7 @@ class Register extends React.Component {
     const isStudentPage = this.state.user_type == 'student'
     return (
       <form className="center-form Register form box" onSubmit={this.submit}>
-        <h1 className="title is-2">Register {this.state.user_type}</h1>
+        <h1 className="title is-2">Register {capitalise(this.state.user_type)}</h1>
         <hr />
         {auth.errorMessage && <span className="has-text-danger is-large">{auth.errorMessage}</span>}
 

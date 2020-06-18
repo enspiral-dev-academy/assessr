@@ -10,7 +10,7 @@ import StudentHome from './student/StudentHome'
 import TeacherHome from './teacher/TeacherHome'
 import AwaitingConfirmation from './AwaitingConfirmation'
 
-import {isAuthenticated, isTeacher, isStudent, isNoOne} from '../utils/auth'
+import {isAuthenticated, isTeacher, isStudent, registrationIsPending} from '../utils/auth'
 
 
 export function App({auth}) {
@@ -29,7 +29,7 @@ export function App({auth}) {
           )}
           {isStudent() && <StudentHome />}
           {isTeacher() && <TeacherHome />}
-          {isNoOne() && <AwaitingConfirmation />}
+          {registrationIsPending() && <AwaitingConfirmation />}
         </div>
 
       </div>

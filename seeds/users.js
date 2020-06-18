@@ -12,21 +12,24 @@ exports.seed = function (knex) {
           user_type: 'teacher',
           user_name: 'admin',
           actual_name: 'Admin Teach',
-          hash: hashSync('admin', saltRounds)
+          hash: hashSync('admin', saltRounds),
+          registration_confirmed: true
         },
         {
           id: 2,
           user_type: 'student',
           user_name: 'kelly',
           actual_name: 'Kelly Keating',
-          hash: hashSync('kelly', saltRounds)
+          hash: hashSync('kelly', saltRounds),
+          registration_confirmed: true
         },
         {
           id: 3,
           user_type: 'student',
           user_name: 'ollie',
           actual_name: 'Oliver Harcourt',
-          hash: hashSync('ollie', saltRounds)
+          hash: hashSync('ollie', saltRounds),
+          registration_confirmed: true
         }
       ])
     })

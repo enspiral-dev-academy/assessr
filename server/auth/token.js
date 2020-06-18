@@ -32,7 +32,8 @@ function createToken (user, secret) {
   const payload = {
     user_id: user.user_id,
     user_name: user.user_name,
-    user_type: user.user_type
+    user_type: user.user_type,
+    registration_confirmed: user.registration_confirmed == 1
   }
 
   const options = {

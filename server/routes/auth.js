@@ -17,12 +17,12 @@ router.get('/users', token.decode, (req, res) => {
 router.post('/register', register, token.issue)
 
 function register (req, res, next) {
-  const { actual_name, user_name, password } = req.body
+  const { actual_name, user_name, password, user_type } = req.body
   userExists(user_name)
     .then(exists => {
       if (exists) return res.status(400).send({ message: "Username Taken" })
 
-      createUser(actual_name, user_name, password)
+      createUser(actual_name, user_name, password, user_type)
         .then(() => next())
         .catch(err => res.status(500).send({message: "Server Error"}))
     })
