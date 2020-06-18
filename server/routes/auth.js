@@ -15,7 +15,7 @@ router.get('/users', token.decode, (req, res) => {
 })
 
 router.post('/register', register, token.issue)
-
+// TODO: Register should also add data to student/teacher table as needed
 function register (req, res, next) {
   const { actual_name, user_name, password, user_type } = req.body
   userExists(user_name)
