@@ -12,6 +12,8 @@ router.get('/', decode, (req, res) => {
     } else {
         db.getAllStudents()
             .then(students => res.json(students))
+            .catch(err => res.status(500).send({message: 'Server Error'}))
+
     }
 })
 
@@ -29,7 +31,9 @@ router.get('/:id', decode, (req, res) => {
                             return assmt
                         })
                 })
-                Promise.all(assmts).then(assmts => res.json(assmts))
+                Promise.all(assmts)
+                .then(assmts => res.json(assmts))
+                .catch(err => res.status(500).send({message: 'Server Error'}))
             })
     }
 })

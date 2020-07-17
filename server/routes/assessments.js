@@ -20,8 +20,7 @@ router.get('/', decode, (req, res) => {
             return Promise.all(queries)
         })
         .then(arr => res.json(arr))
-        .catch(err => res.status(500).send({message: `Server Error`}))
-
+        .catch(err => res.status(500).send({message: 'Server Error'}))
 })
 
 router.post('/submission', decode, (req, res) => {
@@ -42,7 +41,8 @@ router.post('/submission', decode, (req, res) => {
             }
             return db.saveSubmission(sub)
                 .then(() => res.json({record_id: student_assessment_id}))
-        })
+                .catch(err => res.status(500).send({message: 'Server Error'}))
+            })
 })
 
 

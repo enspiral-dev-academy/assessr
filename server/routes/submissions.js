@@ -31,21 +31,24 @@ router.get('/', decode, (req, res) => {
                     return db.getStudentByRecordId(record.record_id)
                         .then(student => ({...record, ...student}))
                 })
-                Promise.all(records).then(arr => res.json(arr))
+                Promise.all(records)
+                .then(arr => res.json(arr))
+                .catch(err => res.status(500).send({message: 'Server Error'}))
             })
     }
 })
 
 router.patch('/done/:id', decode, (req, res) => {
     const {user_type} = req.user
-    if(user_type != 'teacher') {
+    if(user_type !== 'teacher') {
         res.json({})
     } else {
         const record_id = req.params.id
         assmtDb.markAsComplete(record_id)
             .then(() => db.markAllReviewed(record_id))
-            .then(() => res.json({})) 
-        // TODO: work out what to res.json back
+            .then(() => res.json({}))
+            // TODO: work out what to res.json back
+            .catch(err => res.status(500).send({message: 'Server Error'}))
     }
 })
 
@@ -67,6 +70,7 @@ router.patch('/reviewed/:id', decode, (req, res) => {
             })
             .then(() => res.json({})) 
             // TODO: work out what to res.json back
+            .catch(err => res.status(500).send({message: 'Server Error'}))
     }
 })
 
