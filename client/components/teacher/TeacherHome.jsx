@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Route, Link} from 'react-router-dom'
 
+import ErrorMessage from '../ErrorMessage'
 import PendingSubmissions from './PendingSubmissions'
 import Students from './Students'
 import StudentView from './StudentView'
@@ -19,9 +20,10 @@ class TeacherHome extends React.Component {
                 <Link to='/students'> Look at some peeps</Link>
                 <Link to='/signups'> New peeps</Link>
 
-                <Route path="/pending" component={PendingSubmissions} />
-                <Route exact path="/students" component={Students} />
-                <Route path="/students/:id" component={StudentView} />
+                <Route path='/' component={ErrorMessage} />
+                <Route path='/pending' component={PendingSubmissions} />
+                <Route exact path='/students' component={Students} />
+                <Route path='/students/:id' component={StudentView} />
                 <Route path='/signups' component={NewUsers} />
             </>
         )
