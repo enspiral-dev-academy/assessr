@@ -53,16 +53,26 @@ function markAsComplete (id, testDb){
     const db = testDb || connection
 
     return db('students_assessments')
-        .where('id', id)
-        .update({ status: 'complete' })
+        .where('id', id).first()
+        .then(assmt => {
+            if (!assmt) throw new Error('ID doesn\'t exist')
+            return db('students_assessments')
+            .where('id', id)
+            .update({ status: 'complete' })
+        })
 }
 
 function markAsInProgress (id, testDb){
     const db = testDb || connection
 
     return db('students_assessments')
-        .where('id', id)
-        .update({ status: 'in progress' })
+        .where('id', id).first()
+        .then(assmt => {
+            if (!assmt) throw new Error('ID doesn\'t exist')
+            return db('students_assessments')
+            .where('id', id)
+            .update({ status: 'in progress' })
+        })
 }
 
 module.exports = {

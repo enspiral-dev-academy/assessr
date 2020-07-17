@@ -37,8 +37,13 @@ function markAllReviewed(id, testDb) {
     const db = testDb || connection
 
     return db('submissions')
-        .where('student_assessment_id', id)
-        .update({ reviewed: true })
+        .where('student_assessment_id', id).first()
+        .then(sub => {
+            if (!sub) throw new Error('ID doesn\'t exist')
+            return db('submissions')
+            .where('id', id)
+            .update({ reviewed: true })
+        })
 }
 
 function markOneReviewed(id, testDb) {
@@ -46,7 +51,12 @@ function markOneReviewed(id, testDb) {
 
     return db('submissions')
         .where('id', id)
-        .update({ reviewed: true })
+        .then(sub => {
+            if (!sub) throw new Error('ID doesn\'t exist')
+            return db('submissions')
+            .where('id', id)
+            .update({ reviewed: true })
+        })
 }
 
 module.exports = {
