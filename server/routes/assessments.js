@@ -20,7 +20,7 @@ router.get('/', decode, (req, res) => {
             return Promise.all(queries)
         })
         .then(arr => res.json(arr))
-        .catch(err => res.status(500).send({message: 'Server Error'}))
+        .catch(err => res.status(500).send({err: 'Server Error', message: err.message}))
 })
 
 router.post('/submission', decode, (req, res) => {
@@ -31,7 +31,7 @@ router.post('/submission', decode, (req, res) => {
         .then(user => user.id)
         .then(user_id => {
             return db.getUserAssessment(user_id, code)
-                .then(record => (record == undefined) ? db.createRecord(user_id, code).then(arr => arr[0]) : record.id)
+                .then(record => (record === undefined) ? db.createRecord(user_id, code).then(arr => arr[0]) : record.id)
         })
         .then(student_assessment_id => {
             let sub = {
@@ -41,8 +41,9 @@ router.post('/submission', decode, (req, res) => {
             }
             return db.saveSubmission(sub)
                 .then(() => res.json({record_id: student_assessment_id}))
-                .catch(err => res.status(500).send({message: 'Server Error'}))
+                
             })
+        .catch(err => res.status(500).send({err: 'Server Error', message: err.message}))
 })
 
 
