@@ -14,21 +14,29 @@ function getAllAssessments (testDb) {
 
 function getUserAssessments (name, testDb) {
     const db = testDb || connection
-
     return db('users')
-        .select('assessment_code AS code', 'status', 'students_assessments.id AS assessment_record')
-        .where('user_name', name)
-        .join('students_assessments', 'users.id', 'students_assessments.user_id')
+        .where('user_name', name).first()
+        .then(user => {
+            if (!user) throw new Error('User doesn\'t exist')
+            return db('users')
+            .join('students_assessments', 'users.id', 'students_assessments.user_id')
+            .where('user_name', name)
+            .select('assessment_code AS code', 'status', 'students_assessments.id AS assessment_record')
+        })
 }
 
 function getUserAssessment (id, code, testDb) {
     const db = testDb || connection
 
     return db('students_assessments')
-        .where('user_id', id)
-        .andWhere('assessment_code', code)
-        .first()
-
+        .where('user_id', id).first()
+        .then(user => {
+            if (!user) throw new Error('User doesn\'t exist')
+            return db('students_assessments')
+            .where('user_id', id)
+            .andWhere('assessment_code', code)
+            .first()
+        })
 }
 
 function createRecord (user_id, assessment_code, testDb) {
