@@ -33,8 +33,8 @@ router.get('/', decode, (req, res) => {
                 })
                 Promise.all(records)
                 .then(arr => res.json(arr))
-                .catch(err => res.status(500).send({message: 'Server Error'}))
             })
+            .catch(err => res.status(500).send({err: 'Server Error', message: err.message}))
     }
 })
 
@@ -48,7 +48,7 @@ router.patch('/done/:id', decode, (req, res) => {
             .then(() => db.markAllReviewed(record_id))
             .then(() => res.json({}))
             // TODO: work out what to res.json back
-            .catch(err => res.status(500).send({message: 'Server Error'}))
+            .catch(err => res.status(500).send({err: 'Server Error', message: err.message}))
     }
 })
 
@@ -58,7 +58,7 @@ router.patch('/reviewed/:id', decode, (req, res) => {
         res.json({})
     } else {
         const record_id = req.params.id
-        const idArr = req.body
+        const idArr = [req.body]
         const markAllReviewed = idArr.map(id => db.markOneReviewed(id))
 
         Promise.all(markAllReviewed)
@@ -70,7 +70,7 @@ router.patch('/reviewed/:id', decode, (req, res) => {
             })
             .then(() => res.json({})) 
             // TODO: work out what to res.json back
-            .catch(err => res.status(500).send({message: 'Server Error'}))
+            .catch(err => res.status(500).send({err: 'Server Error', message: err.message}))
     }
 })
 
