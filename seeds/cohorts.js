@@ -15,6 +15,12 @@ exports.seed = function (knex) {
           name: 'Hihi',
           year: 2018,
           campus: 'Wellington'
+        },
+        {
+          id: 64,
+          name: 'Manaia',
+          year: 2020,
+          campus: 'Online'
         }
       ])
     })

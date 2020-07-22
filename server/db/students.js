@@ -16,7 +16,15 @@ function getStudentInfo (id, testDb) {
         .where('user_id', id)
 }
 
+function addNewStudent (user, testDb) {
+    const db = testDb || connection
+
+    return db('students')
+        .insert(user, 'id')
+}
+
 module.exports = {
     getAllStudents,
-    getStudentInfo
+    getStudentInfo,
+    addNewStudent
 }

@@ -1,6 +1,7 @@
 const router = require('express').Router()
 
 const { userExists, createUser, getNewUsers } = require('../db/users')
+const { addNewStudent } = require('../db/students')
 const token = require('../auth/token')
 
 
@@ -23,6 +24,16 @@ function register (req, res, next) {
       if (exists) return res.status(400).send({ message: "Username Taken" })
 
       createUser(actual_name, user_name, password, user_type)
+        .then(user_id => {
+          if (user_type == 'teacher') {
+            // TODO: store campus info in a teachers table
+          } else {
+            return addNewStudent({
+              user_id,
+              cohort_id: 64 // TODO: Base this on user input
+            })
+          }
+        })
         .then(() => next())
         .catch(err => res.status(500).send({message: "Server Error"}))
     })
