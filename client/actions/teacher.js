@@ -58,9 +58,9 @@ export function assmtCompleted (id) {
     }
 }
 
-export function reviewedButIncomplete (record_id, reviewedEvidenceIds) {
+export function reviewedButIncomplete (record_id, note, reviewedEvidenceIds) {
     return dispatch => {
-        markSubmissionsReviewed(record_id, reviewedEvidenceIds)
+        markSubmissionsReviewed(record_id, note, reviewedEvidenceIds)
             .then(() => {
                 dispatch(markAsReviewed(record_id))
             })

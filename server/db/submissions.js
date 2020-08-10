@@ -41,12 +41,12 @@ function markAllReviewed(id, testDb) {
         .update({ reviewed: true })
 }
 
-function markOneReviewed(id, testDb) {
+function markOneReviewed(id, note, testDb) {
     const db = testDb || connection
 
     return db('submissions')
         .where('id', id)
-        .update({ reviewed: true })
+        .update({ reviewed: true , notes: note})
 }
 
 module.exports = {

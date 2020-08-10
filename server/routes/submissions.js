@@ -55,8 +55,8 @@ router.patch('/reviewed/:id', decode, (req, res) => {
         res.json({})
     } else {
         const record_id = req.params.id
-        const idArr = req.body
-        const markAllReviewed = idArr.map(id => db.markOneReviewed(id))
+        const {reviewedEvidenceIds, note} = req.body
+        const markAllReviewed = reviewedEvidenceIds.map(id => db.markOneReviewed(id, note))
 
         Promise.all(markAllReviewed)
             .then(() => db.getIncompleteByRecordId(record_id))
