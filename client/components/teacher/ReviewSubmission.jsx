@@ -6,7 +6,12 @@ import {assmtCompleted, reviewedButIncomplete} from '../../actions/teacher'
 
 class ReviewSubmission extends React.Component {
     state = {
-        showEvidence: false
+        showEvidence: false,
+        note: ''
+    }
+
+    addNote = (e) => {
+        this.setState({note: e.target.value})
     }
 
     submitComplete = () => {
@@ -17,7 +22,7 @@ class ReviewSubmission extends React.Component {
         const {submission} = this.props
         const reviewedIds = submission.submissions.map(s => s.id)
 
-        this.props.dispatch(reviewedButIncomplete(submission.record_id, reviewedIds))
+        this.props.dispatch(reviewedButIncomplete(submission.record_id, this.state.note, reviewedIds))
     }
 
     toggleEvidence = () => {
@@ -35,6 +40,7 @@ class ReviewSubmission extends React.Component {
                 ))}
             </ul>
             <p>Have they finished it all good?</p>
+            <textarea onChange={this.addNote} name="note" id="" cols="30" rows="5"></textarea>
             <button onClick={this.submitComplete}>Y</button>
             <button onClick={this.submitReview}>N</button>
         </>
