@@ -9,7 +9,7 @@ export default function Evidence({e, i, elen}) {
                   {e.evidence}
                 </div>
                 {/* Always show the last teacher note by default */}
-                {(elen - 1 == i || showNotes) && <div className="evidenceNotes yellow">{e.notes}</div>} 
+                {e.notes != '' && ((elen - 1 == i || showNotes) && <div className="evidenceNotes yellow">{e.notes}</div>)} 
         </li>
     )
 }
