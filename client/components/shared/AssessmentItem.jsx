@@ -2,12 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { submitEvidence } from "../../actions/assessments";
+import Evidence from "./Evidence";
 
 class AssessmentItem extends React.Component {
   state = {
     showMore: false,
     evidence: "",
-    showNotes: false
   };
 
   findRecord = (assessments) => {
@@ -92,14 +92,7 @@ class AssessmentItem extends React.Component {
         <h4>{status}</h4>
         <p>Evidence Submitted:</p>
         <ul>
-          {evidence.map((e, i) => (
-            <li key={i} onClick={() => this.setState({showNotes: !this.state.showNotes})}>
-                <div>
-                  {e.evidence}
-                </div>
-                {(evidence.length - 1 == i || this.state.showNotes) && <div>{e.notes}</div>}
-            </li>
-          ))}
+          {evidence.map((e, i) => <Evidence key={i} e={e} i={i} elen={evidence.length}/>)}
         </ul>
         {status != "complete" && this.renderSubmit()}
       </React.Fragment>
