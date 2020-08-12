@@ -6,6 +6,7 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node server",
+    "test": "jest --watchAll --noStackTrace",
     "postinstall": "webpack",
     "dev": "run-p watch:client watch:server",
     "watch:client": "webpack --watch",
@@ -24,11 +25,9 @@
     ]
   },
   "jest": {
-    "setupFiles": [
-      "./tests/client/setup-enzyme.js"
-    ]
   },
   "devDependencies": {
+    "@testing-library/react": "^10.4.8",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "nodemon": "^2.0.2",
