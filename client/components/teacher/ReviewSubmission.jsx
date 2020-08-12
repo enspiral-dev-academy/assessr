@@ -20,9 +20,12 @@ class ReviewSubmission extends React.Component {
 
     submitReview = () => {
         const {submission} = this.props
+        const {note} = this.state
         const reviewedIds = submission.submissions.map(s => s.id)
 
-        this.props.dispatch(reviewedButIncomplete(submission.record_id, this.state.note, reviewedIds))
+        this.setState({note: ''})
+
+        this.props.dispatch(reviewedButIncomplete(submission.record_id, note, reviewedIds))
     }
 
     toggleEvidence = () => {
@@ -40,7 +43,7 @@ class ReviewSubmission extends React.Component {
                 ))}
             </ul>
             <p>Have they finished it all good?</p>
-            <textarea onChange={this.addNote} name="note" id="" cols="30" rows="5"></textarea>
+            <textarea onChange={this.addNote} value={this.state.note} name="note" id="" cols="30" rows="5"></textarea>
             <button onClick={this.submitComplete}>Y</button>
             <button onClick={this.submitReview}>N</button>
         </>
