@@ -8,7 +8,8 @@ const subDb = require('../db/submissions')
 
 router.get('/', decode, (req, res) => {
     const {user_name} = req.user
-    db.getUserAssessments(user_name)
+    userDb.usernameExists(user_name)
+        .then(() => db.getUserAssessments(user_name))
         .then(assmts => {
             let queries = assmts.map(obj => {
                 return subDb.getSubmissionByRecordId(obj.assessment_record)
@@ -20,19 +21,19 @@ router.get('/', decode, (req, res) => {
             return Promise.all(queries)
         })
         .then(arr => res.json(arr))
-        .catch(err => res.status(500).send({message: `Server Error`}))
-
+        .catch(err => res.status(500).json({err: 'Server Error', message: err.message}))
 })
 
 router.post('/submission', decode, (req, res) => {
     let {code, evidence} = req.body
     let {user_name} = req.user
 
-    userDb.getUserByUsername(user_name)
+    userDb.usernameExists(user_name)
+        .then(() => userDb.getUserByUsername(user_name))
         .then(user => user.id)
         .then(user_id => {
             return db.getUserAssessment(user_id, code)
-                .then(record => (record == undefined) ? db.createRecord(user_id, code).then(arr => arr[0]) : record.id)
+                .then(record => (record === undefined) ? db.createRecord(user_id, code).then(arr => arr[0]) : record.id)
         })
         .then(student_assessment_id => {
             let sub = {
@@ -42,7 +43,8 @@ router.post('/submission', decode, (req, res) => {
             }
             return db.saveSubmission(sub)
                 .then(() => res.json({record_id: student_assessment_id}))
-        })
+            })
+        .catch(err => res.status(500).json({err: 'Server Error', message: err.message}))
 })
 
 
@@ -55,7 +57,7 @@ router.post('/submission', decode, (req, res) => {
 //         })
 //         .then(assmts => collate(modules, assmts))
 //         .then(result => res.json(result))
-//         .catch(err => res.status(500).send({message: "Server Error"}))
+//         .catch(err => res.status(500).json({message: "Server Error"}))
 // })
 
 // function collate(modules, assessments) {

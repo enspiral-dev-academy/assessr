@@ -16,9 +16,9 @@ function getUserAssessments (name, testDb) {
     const db = testDb || connection
 
     return db('users')
-        .select('assessment_code AS code', 'status', 'students_assessments.id AS assessment_record')
-        .where('user_name', name)
         .join('students_assessments', 'users.id', 'students_assessments.user_id')
+        .where('user_name', name)
+        .select('assessment_code AS code', 'status', 'students_assessments.id AS assessment_record')
 }
 
 function getUserAssessment (id, code, testDb) {
@@ -28,7 +28,6 @@ function getUserAssessment (id, code, testDb) {
         .where('user_id', id)
         .andWhere('assessment_code', code)
         .first()
-
 }
 
 function createRecord (user_id, assessment_code, testDb) {
@@ -57,6 +56,17 @@ function markAsComplete (id, testDb){
         .update({ status: 'complete' })
 }
 
+function assessmentExists(id, testDb) {
+    const db = testDb || connection
+    
+    return db('students_assessments')
+        .where('id', id)
+        .then(assmt => {
+            if(assmt.length > 0) throw new Error('ID doesn\'t exist')
+            return
+        })
+}
+
 function markAsInProgress (id, testDb){
     const db = testDb || connection
 
@@ -73,5 +83,6 @@ module.exports = {
     createRecord,
     saveSubmission,
     markAsComplete,
-    markAsInProgress
+    markAsInProgress,
+    assessmentExists
 }

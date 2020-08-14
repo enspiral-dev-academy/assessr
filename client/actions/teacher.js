@@ -1,5 +1,6 @@
 import { getPendingSubmissions, getStudents, getStudentInfo, markAsComplete, markSubmissionsReviewed } from '../apis/teacher'
 import { saveAllCompleted } from './assessments'
+import { showError } from './error'
 
 export function saveAllPending(pending) {
     return {
@@ -25,44 +26,39 @@ export function markAsReviewed(record_id) {
 export function getAllPending () {
     return dispatch => {
         getPendingSubmissions()
-            .then(subs => {
-                dispatch(saveAllPending(subs))
-            })
+            .then(subs => dispatch(saveAllPending(subs)))
+            .catch(err => dispatch(showError(err.message)))
     }
 }
 
 export function getAllStudents () {
     return dispatch => {
         getStudents()
-            .then(students => {
-                dispatch(saveAllStudents(students))
-            })
+            .then(students => dispatch(saveAllStudents(students)))
+            .catch(err => dispatch(showError(err.message)))
     }
 }
 
 export function getStudentAssessments (id) {
     return dispatch => {
         getStudentInfo(id)
-            .then(assmts => {
-                dispatch(saveAllCompleted(assmts))
-            })
+            .then(assmts => dispatch(saveAllCompleted(assmts)))
+            .catch(err => dispatch(showError(err.message)))
     }
 }
 
 export function assmtCompleted (id) {
     return dispatch => {
         markAsComplete(id)
-            .then(() => {
-                dispatch(markAsReviewed(id))
-            })
+            .then(() => dispatch(markAsReviewed(id)))
+            .catch(err => dispatch(showError(err.message)))
     }
 }
 
 export function reviewedButIncomplete (record_id, reviewedEvidenceIds) {
     return dispatch => {
         markSubmissionsReviewed(record_id, reviewedEvidenceIds)
-            .then(() => {
-                dispatch(markAsReviewed(record_id))
-            })
+            .then(() => dispatch(markAsReviewed(record_id)))
+            .catch(err => dispatch(showError(err.message)))
     }
 }

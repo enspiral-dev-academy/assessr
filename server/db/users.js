@@ -12,12 +12,26 @@ function createUser (actual_name, user_name, password, user_type, testDb) {
     })
 }
 
-function userExists (user_name, testDb) {
+function usernameExists (user_name, testDb) {
   const db = testDb || connection
 
   return db('users')
     .where('user_name', user_name)
-    .then(users => users.length > 0)
+    .then(users => {
+      if(users.length > 0) throw new Error('User doesn\'t exist')
+      return
+    })
+}
+
+function userExists (id, testDb) {
+  const db = testDb || connection
+
+  return db('users')
+    .where('id', id)
+    .then(users => {
+      if(users.length > 0) throw new Error('User doesn\'t exist')
+      return
+    })
 }
 
 function getUserByUsername (user_name, testDb) {
@@ -37,6 +51,7 @@ function getNewUsers (testDb) {
 
 module.exports = {
   createUser,
+  usernameExists,
   userExists,
   getUserByUsername,
   getNewUsers

@@ -17,13 +17,14 @@ export function App({auth}) {
   return (
     <Router>
       <Nav />
-      <div className="container has-text-centered">  
+      <div className='container has-text-centered'>  
         <div className=''>
           {!isAuthenticated() && (
             <>
-            <Route exact path="/" component={Login} />
+            <Route exact path='/' component={Login} />
+            
             <Route exact path='/register' component={WhatType} />
-            <Route path="/register/:type" component={Register} />
+            <Route path='/register/:type' component={Register} />
             </>
 
           )}
