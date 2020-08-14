@@ -60,7 +60,7 @@ router.patch('/reviewed/:id', decode, (req, res) => {
     if(user_type != 'teacher') {
         res.json({})
     } else {
-        const idArr = [req.body] // TODO: check if this works?
+        const idArr = [req.body] // TODO: check if this works? or what the hell it's doing anyway
         const markAllReviewed = idArr.map(id => db.submissionExists()
                 .then(() => markOneReviewed(id))
             )
