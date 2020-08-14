@@ -71,7 +71,8 @@ router.patch('/reviewed/:id', decode, (req, res) => {
                 if(itemsStillToReview.length == 0) {
                     return assmtDb.assessmentExists(record_id)
                         .then(() => markAsInProgress(record_id))
-                }
+                } 
+                // TODO: check we don't need an else here
             })
             .then(() => res.json({})) 
             // TODO: work out what to res.json back
