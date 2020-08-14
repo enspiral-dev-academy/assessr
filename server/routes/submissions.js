@@ -31,9 +31,9 @@ router.get('/', decode, (req, res) => {
                     return db.getStudentByRecordId(record.record_id)
                         .then(student => ({...record, ...student}))
                 })
-                Promise.all(records)
-                .then(arr => res.json(arr))
+                return Promise.all(records)
             })
+            .then(arr => res.json(arr))
             .catch(err => res.status(500).json({err: 'Server Error', message: err.message}))
     }
 })
