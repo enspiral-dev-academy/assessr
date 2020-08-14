@@ -38,7 +38,8 @@ function getUserByUsername (user_name, testDb) {
   const db = testDb || connection
 
   return db('users')
-    .where('user_name', user_name).first()
+    .where('user_name', user_name)
+    .first()
 }
 
 function getNewUsers (testDb) {
