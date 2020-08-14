@@ -55,16 +55,17 @@ router.patch('/done/:id', decode, (req, res) => {
 
 router.patch('/reviewed/:id', decode, (req, res) => {
     const {user_type} = req.user
+    const record_id = req.params.id
+
     if(user_type != 'teacher') {
         res.json({})
     } else {
-        const record_id = req.params.id
-        const idArr = [req.body]
+        const idArr = [req.body] // TODO: check if this works?
         const markAllReviewed = idArr.map(id => db.submissionExists()
                 .then(() => markOneReviewed(id))
             )
 
-        Promise.all(markAllReviewed)
+        return Promise.all(markAllReviewed)
             .then(() => db.getIncompleteByRecordId(record_id))
             .then(itemsStillToReview => {
                 if(itemsStillToReview.length == 0) {
