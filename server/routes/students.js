@@ -14,7 +14,6 @@ router.get('/', decode, (req, res) => {
         db.getAllStudents()
             .then(students => res.json(students))
             .catch(err => res.status(500).json({err: 'Server Error', message: err.message}))
-
     }
 })
 
