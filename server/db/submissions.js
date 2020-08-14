@@ -37,7 +37,7 @@ function markAllReviewed(record_id, testDb) {
     const db = testDb || connection
 
     return db('submissions')
-        .where('student_assessment_id', id)
+        .where('student_assessment_id', record_id)
         .update({ reviewed: true })
 }
 
