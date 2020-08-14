@@ -42,7 +42,6 @@ router.post('/submission', decode, (req, res) => {
             }
             return db.saveSubmission(sub)
                 .then(() => res.json({record_id: student_assessment_id}))
-                
             })
         .catch(err => res.status(500).json({err: 'Server Error', message: err.message}))
 })
