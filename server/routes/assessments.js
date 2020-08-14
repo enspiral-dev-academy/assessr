@@ -7,8 +7,8 @@ const userDb = require('../db/users')
 const subDb = require('../db/submissions')
 
 router.get('/', decode, (req, res) => {
-    const {user_name} = req.user
-    db.getUserAssessments(user_name)
+    userDb.usernameExists(req.user.user_name)
+        .then(() => db.getUserAssessments(req.user.user_name))
         .then(assmts => {
             let queries = assmts.map(obj => {
                 return subDb.getSubmissionByRecordId(obj.assessment_record)
@@ -27,7 +27,8 @@ router.post('/submission', decode, (req, res) => {
     let {code, evidence} = req.body
     let {user_name} = req.user
 
-    userDb.getUserByUsername(user_name)
+    userDb.usernameExists(user_name)
+        .then(() => userDb.getUserByUsername(user_name))
         .then(user => user.id)
         .then(user_id => {
             return db.getUserAssessment(user_id, code)

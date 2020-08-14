@@ -44,7 +44,8 @@ router.patch('/done/:id', decode, (req, res) => {
         res.json({})
     } else {
         const record_id = req.params.id
-        assmtDb.markAsComplete(record_id)
+        assmtDb.assessmentExists(record_id)
+            .then(() => assmtDb.markAsComplete(record_id))
             .then(() => db.markAllReviewed(record_id))
             .then(() => res.json({}))
             // TODO: work out what to res.json back
@@ -59,13 +60,16 @@ router.patch('/reviewed/:id', decode, (req, res) => {
     } else {
         const record_id = req.params.id
         const idArr = [req.body]
-        const markAllReviewed = idArr.map(id => db.markOneReviewed(id))
+        const markAllReviewed = idArr.map(id => db.submissionExists()
+                .then(() => markOneReviewed(id))
+            )
 
         Promise.all(markAllReviewed)
             .then(() => db.getIncompleteByRecordId(record_id))
             .then(itemsStillToReview => {
                 if(itemsStillToReview.length == 0) {
-                    return assmtDb.markAsInProgress(record_id)
+                    return assmtDb.assessmentExists(record_id)
+                        .then(() => markAsInProgress(record_id))
                 }
             })
             .then(() => res.json({})) 

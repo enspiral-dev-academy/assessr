@@ -1,6 +1,6 @@
 const router = require('express').Router()
 
-const { userExists, createUser, getNewUsers } = require('../db/users')
+const { usernameExists, createUser, getNewUsers } = require('../db/users')
 const token = require('../auth/token')
 
 
@@ -19,7 +19,7 @@ router.post('/register', register, token.issue)
 // TODO: Register should also add data to student/teacher table as needed
 function register (req, res, next) {
   const { actual_name, user_name, password, user_type } = req.body
-  userExists(user_name)
+  usernameExists(user_name)
     .then(exists => {
       if (exists) return res.status(400).json({ message: 'Username Taken' })
 

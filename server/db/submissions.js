@@ -33,17 +33,12 @@ function getStudentByRecordId (record_id, testDb) {
         .first()
 }
 
-function markAllReviewed(id, testDb) {
+function markAllReviewed(record_id, testDb) {
     const db = testDb || connection
 
     return db('submissions')
-        .where('student_assessment_id', id).first()
-        .then(sub => {
-            if (!sub) throw new Error('ID doesn\'t exist')
-            return db('submissions')
-            .where('id', id)
-            .update({ reviewed: true })
-        })
+        .where('student_assessment_id', id)
+        .update({ reviewed: true })
 }
 
 function markOneReviewed(id, testDb) {
@@ -51,11 +46,17 @@ function markOneReviewed(id, testDb) {
 
     return db('submissions')
         .where('id', id)
+        .update({ reviewed: true })
+}
+
+function submissionExists (id, testDb) {
+    const db = testDb || connection
+
+    return db('submissions')
+        .where('id', id)
         .then(sub => {
-            if (!sub) throw new Error('ID doesn\'t exist')
-            return db('submissions')
-            .where('id', id)
-            .update({ reviewed: true })
+            if (sub.length > 0) throw new Error('ID doesn\'t exist')
+            return
         })
 }
 
@@ -65,5 +66,6 @@ module.exports = {
     getIncompleteByRecordId,
     getStudentByRecordId,
     markAllReviewed,
-    markOneReviewed
+    markOneReviewed,
+    submissionExists
 }

@@ -2,6 +2,7 @@ const router = require('express').Router()
 // const verifyJwt = require('express-jwt')
 
 const db = require('../db/students')
+const userDb = require('../db/users')
 const subDb = require('../db/submissions')
 const { decode } = require('../auth/token')
 
@@ -22,7 +23,8 @@ router.get('/:id', decode, (req, res) => {
     if(user_type != 'teacher') {
         res.json({})
     } else {
-        db.getStudentInfo(req.params.id)
+        userDb.userExists(req.params.id)
+            .then(() => db.getStudentInfo(req.params.id))
             .then(assmts => {
                 assmts = assmts.map(assmt => {
                     return subDb.getSubmissionByRecordId(assmt.assessment_record)
