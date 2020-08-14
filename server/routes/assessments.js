@@ -20,7 +20,7 @@ router.get('/', decode, (req, res) => {
             return Promise.all(queries)
         })
         .then(arr => res.json(arr))
-        .catch(err => res.status(500).send({err: 'Server Error', message: err.message}))
+        .catch(err => res.status(500).json({err: 'Server Error', message: err.message}))
 })
 
 router.post('/submission', decode, (req, res) => {
@@ -43,7 +43,7 @@ router.post('/submission', decode, (req, res) => {
                 .then(() => res.json({record_id: student_assessment_id}))
                 
             })
-        .catch(err => res.status(500).send({err: 'Server Error', message: err.message}))
+        .catch(err => res.status(500).json({err: 'Server Error', message: err.message}))
 })
 
 
@@ -56,7 +56,7 @@ router.post('/submission', decode, (req, res) => {
 //         })
 //         .then(assmts => collate(modules, assmts))
 //         .then(result => res.json(result))
-//         .catch(err => res.status(500).send({message: "Server Error"}))
+//         .catch(err => res.status(500).json({message: "Server Error"}))
 // })
 
 // function collate(modules, assessments) {
