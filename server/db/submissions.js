@@ -14,7 +14,7 @@ function getSubmissionByRecordId (record_id, testDb) {
         .where('student_assessment_id', record_id)
 }
 
-function getIncompleteByRecordId (record_id, testDb) {
+function getUnreviewedSubsByRecordId (record_id, testDb) {
     const db = testDb || connection
 
     return db('submissions')
@@ -63,7 +63,7 @@ function submissionExists (id, testDb) {
 module.exports = {
     getPendingSubmissions,
     getSubmissionByRecordId,
-    getIncompleteByRecordId,
+    getUnreviewedSubsByRecordId,
     getStudentByRecordId,
     markAllReviewed,
     markOneReviewed,

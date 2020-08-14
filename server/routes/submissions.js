@@ -66,7 +66,7 @@ router.patch('/reviewed/:id', decode, (req, res) => {
             )
 
         return Promise.all(markAllReviewed)
-            .then(() => db.getIncompleteByRecordId(record_id))
+            .then(() => db.getUnreviewedSubsByRecordId(record_id))
             .then(itemsStillToReview => {
                 if(itemsStillToReview.length == 0) {
                     return assmtDb.assessmentExists(record_id)
