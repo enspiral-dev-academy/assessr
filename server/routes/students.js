@@ -32,9 +32,9 @@ router.get('/:id', decode, (req, res) => {
                             return assmt
                         })
                 })
-                Promise.all(assmts)
-                .then(assmts => res.json(assmts))
+                return Promise.all(assmts)
             })
+            .then(assmts => res.json(assmts))
             .catch(err => res.status(500).json({err: 'Server Error', message: err.message}))
     }
 })
