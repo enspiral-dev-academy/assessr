@@ -16,7 +16,15 @@ function getStudentInfo (id, testDb) {
         .select('assessment_code AS code', 'status', 'students_assessments.id AS assessment_record')
 }
 
+function addNewStudent (user, testDb) {
+    const db = testDb || connection
+
+    return db('students')
+        .insert(user, 'id')
+}
+
 module.exports = {
     getAllStudents,
-    getStudentInfo
+    getStudentInfo,
+    addNewStudent
 }
