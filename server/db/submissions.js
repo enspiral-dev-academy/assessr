@@ -14,7 +14,7 @@ function getSubmissionByRecordId (record_id, testDb) {
         .where('student_assessment_id', record_id)
 }
 
-function getIncompleteByRecordId (record_id, testDb) {
+function getUnreviewedSubsByRecordId (record_id, testDb) {
     const db = testDb || connection
 
     return db('submissions')
@@ -33,11 +33,11 @@ function getStudentByRecordId (record_id, testDb) {
         .first()
 }
 
-function markAllReviewed(id, testDb) {
+function markAllReviewed(record_id, testDb) {
     const db = testDb || connection
 
     return db('submissions')
-        .where('student_assessment_id', id)
+        .where('student_assessment_id', record_id)
         .update({ reviewed: true })
 }
 
@@ -49,11 +49,23 @@ function markOneReviewed(id, testDb) {
         .update({ reviewed: true })
 }
 
+function submissionExists (id, testDb) {
+    const db = testDb || connection
+
+    return db('submissions')
+        .where('id', id)
+        .then(sub => {
+            if (sub.length > 0) throw new Error('ID doesn\'t exist')
+            return
+        })
+}
+
 module.exports = {
     getPendingSubmissions,
     getSubmissionByRecordId,
-    getIncompleteByRecordId,
+    getUnreviewedSubsByRecordId,
     getStudentByRecordId,
     markAllReviewed,
-    markOneReviewed
+    markOneReviewed,
+    submissionExists
 }

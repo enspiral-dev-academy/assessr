@@ -31,42 +31,52 @@ router.get('/', decode, (req, res) => {
                     return db.getStudentByRecordId(record.record_id)
                         .then(student => ({...record, ...student}))
                 })
-                Promise.all(records).then(arr => res.json(arr))
+                return Promise.all(records)
             })
+            .then(arr => res.json(arr))
+            .catch(err => res.status(500).json({err: 'Server Error', message: err.message}))
     }
 })
 
 router.patch('/done/:id', decode, (req, res) => {
     const {user_type} = req.user
-    if(user_type != 'teacher') {
+    if(user_type !== 'teacher') {
         res.json({})
     } else {
         const record_id = req.params.id
-        assmtDb.markAsComplete(record_id)
+        assmtDb.assessmentExists(record_id)
+            .then(() => assmtDb.markAsComplete(record_id))
             .then(() => db.markAllReviewed(record_id))
-            .then(() => res.json({})) 
-        // TODO: work out what to res.json back
+            .then(() => res.json({}))
+            // TODO: work out what to res.json back
+            .catch(err => res.status(500).json({err: 'Server Error', message: err.message}))
     }
 })
 
 router.patch('/reviewed/:id', decode, (req, res) => {
     const {user_type} = req.user
+    const record_id = req.params.id
+
     if(user_type != 'teacher') {
         res.json({})
     } else {
-        const record_id = req.params.id
-        const idArr = req.body
-        const markAllReviewed = idArr.map(id => db.markOneReviewed(id))
+        const idArr = [req.body] // TODO: check if this works? or what the hell it's doing anyway
+        const markAllReviewed = idArr.map(id => db.submissionExists()
+                .then(() => markOneReviewed(id))
+            )
 
-        Promise.all(markAllReviewed)
-            .then(() => db.getIncompleteByRecordId(record_id))
+        return Promise.all(markAllReviewed)
+            .then(() => db.getUnreviewedSubsByRecordId(record_id))
             .then(itemsStillToReview => {
                 if(itemsStillToReview.length == 0) {
-                    return assmtDb.markAsInProgress(record_id)
-                }
+                    return assmtDb.assessmentExists(record_id)
+                        .then(() => markAsInProgress(record_id))
+                } 
+                // TODO: check we don't need an else here
             })
             .then(() => res.json({})) 
             // TODO: work out what to res.json back
+            .catch(err => res.status(500).json({err: 'Server Error', message: err.message}))
     }
 })
 

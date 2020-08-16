@@ -1,7 +1,8 @@
 const router = require('express').Router()
 
-const { userExists, createUser, getNewUsers } = require('../db/users')
 const { addNewStudent } = require('../db/students')
+const { usernameExists, createUser, getNewUsers } = require('../db/users')
+
 const token = require('../auth/token')
 
 
@@ -12,6 +13,7 @@ router.get('/users', token.decode, (req, res) => {
   } else {
       getNewUsers()
           .then(users => res.json(users))
+          .catch(err => res.status(500).json({err: 'Server Error', message: err.message}))
   }
 })
 
@@ -19,9 +21,9 @@ router.post('/register', register, token.issue)
 // TODO: Register should also add data to student/teacher table as needed
 function register (req, res, next) {
   const { actual_name, user_name, password, user_type } = req.body
-  userExists(user_name)
+  usernameExists(user_name)
     .then(exists => {
-      if (exists) return res.status(400).send({ message: "Username Taken" })
+      if (exists) return res.status(400).json({ message: 'Username Taken' })
 
       createUser(actual_name, user_name, password, user_type)
         .then(user_id => {
@@ -35,9 +37,8 @@ function register (req, res, next) {
           }
         })
         .then(() => next())
-        .catch(err => res.status(500).send({message: "Server Error"}))
     })
-    .catch(err => res.status(500).send({message: "Server Error"}))
+    .catch(err => res.status(500).json({err: 'Server Error', message: err.message}))
 }
 
 router.post('/login', token.issue)
