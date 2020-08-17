@@ -1,17 +1,19 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from "react"
+import { connect } from "react-redux"
 
-function ErrorMessage (props) {
-  return props.error
-    ? <div style={{ margin: '100px', textAlign: 'center', color: 'red' }}>
-      <h1><b>{props.error}</b></h1>
+function ErrorMessage(props) {
+  return props.error ? (
+    <div style={{ margin: "100px", textAlign: "center", color: "red" }}>
+      <h1>
+        <b>{props.error}</b>
+      </h1>
     </div>
-    : null
+  ) : null
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
-    error: state.error
+    error: state.error,
   }
 }
 

@@ -1,33 +1,33 @@
-import request from 'superagent'
+import request from "superagent"
 
-import { get } from '../utils/localstorage'
-import { isAuthenticated } from '../utils/auth'
+import { get } from "../utils/localstorage"
+import { isAuthenticated } from "../utils/auth"
 
-export function register (creds) {
-  const token = get('token')
-  const headers = { Accept: 'application/json' }
+export function register(creds) {
+  const token = get("token")
+  const headers = { Accept: "application/json" }
 
   if (isAuthenticated()) {
-    headers['Authorization'] = `Bearer ${token}`
+    headers["Authorization"] = `Bearer ${token}`
   }
 
   return request
-    .post('/api/auth/register')
+    .post("/api/auth/register")
     .set(headers)
     .send(creds)
     .then(res => res.body.token)
 }
 
-export function login (creds) {
-  const token = get('token')
-  const headers = { Accept: 'application/json' }
+export function login(creds) {
+  const token = get("token")
+  const headers = { Accept: "application/json" }
 
   if (isAuthenticated()) {
-    headers['Authorization'] = `Bearer ${token}`
+    headers["Authorization"] = `Bearer ${token}`
   }
 
   return request
-    .post('/api/auth/login')
+    .post("/api/auth/login")
     .set(headers)
     .send(creds)
     .then(res => res.body.token)
