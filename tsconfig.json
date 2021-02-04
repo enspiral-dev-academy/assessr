@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "target": "es6",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "noImplicitAny": true,
+    "jsx": "react",
+    "removeComments": true
+  },
+  "include": ["src/index.tsx"]
+}

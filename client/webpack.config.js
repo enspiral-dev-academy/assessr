@@ -37,10 +37,14 @@ module.exports = {
           "sass-loader",
         ],
       },
+      {
+        test: /\.(ts|tsx)$/,
+        loader: 'ts-loader',
+      },
     ],
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
   devtool: "source-map",
 }
