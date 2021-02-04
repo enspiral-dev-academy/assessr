@@ -13,7 +13,10 @@ router.get('/users', token.decode, (req, res) => {
   } else {
       getNewUsers()
           .then(users => res.json(users))
-          .catch(err => res.status(500).json({err: 'Server Error', message: err.message}))
+      .catch(err => {
+        console.error(err)
+        res.status(500).json({err: 'Server Error', message: err.message})
+      })
   }
 })
 
@@ -38,7 +41,10 @@ function register (req, res, next) {
         })
         .then(() => next())
     })
-    .catch(err => res.status(500).json({err: 'Server Error', message: err.message}))
+    .catch(err => {
+      console.err(err)
+      res.status(500).json({err: 'Server Error', message: err.message})
+    })
 }
 
 router.post('/login', token.issue)
