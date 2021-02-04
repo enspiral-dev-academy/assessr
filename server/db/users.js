@@ -18,7 +18,7 @@ function usernameExists (user_name, testDb) {
   return db('users')
     .where('user_name', user_name)
     .then(users => {
-      if(users.length > 0) throw new Error('User doesn\'t exist')
+      if(!users.length) throw new Error('User doesn\'t exist')
       return
     })
 }
@@ -29,7 +29,7 @@ function userExists (id, testDb) {
   return db('users')
     .where('id', id)
     .then(users => {
-      if(users.length > 0) throw new Error('User doesn\'t exist')
+      if(!users.length) throw new Error('User doesn\'t exist')
       return
     })
 }
