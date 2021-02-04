@@ -1,4 +1,4 @@
-import moduleData from "../../data"
+import moduleData from "../moduleData"
 
 const initialState = moduleData
 
