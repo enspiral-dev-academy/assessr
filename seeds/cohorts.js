@@ -1,21 +1,28 @@
 exports.seed = function (knex) {
   // Deletes ALL existing entries
-  return knex('cohorts').del()
+  return knex("cohorts")
+    .del()
     .then(function () {
       // Inserts seed entries
-      return knex('cohorts').insert([
+      return knex("cohorts").insert([
         {
           id: 31,
-          name: 'Hihi',
+          name: "Hihi",
           year: 2017,
-          campus: 'Wellington'
+          campus: "Wellington",
         },
         {
           id: 44,
-          name: 'Hihi',
+          name: "Hihi",
           year: 2018,
-          campus: 'Wellington'
-        }
+          campus: "Wellington",
+        },
+        {
+          id: 64,
+          name: "Manaia",
+          year: 2020,
+          campus: "Online",
+        },
       ])
     })
 }

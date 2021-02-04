@@ -1,19 +1,19 @@
 const initialState = []
 
-export default function completed (state = initialState, action) {
+export default function completed(state = initialState, action) {
   switch (action.type) {
-    case 'SAVE_COMPLETED':
+    case "SAVE_COMPLETED":
       return action.completed
-    case 'PENDING_ASSESSMENT':
+    case "PENDING_ASSESSMENT":
       let evidence = {
         evidence: action.evidence,
-        reviewed: false
+        reviewed: false,
       }
 
       // try update existing
       let updated = false
       state = state.map(assmt => {
-        if(assmt.code == action.code) {
+        if (assmt.code == action.code) {
           assmt.status = "pending review"
           assmt.evidence.push(evidence)
           updated = true
@@ -21,13 +21,16 @@ export default function completed (state = initialState, action) {
         return assmt
       })
       // but if there was nothing to update...
-      if(!updated) {
-        state = [...state, {
-          code: action.code, 
-          status: "pending review", 
-          assessment_record: action.record_id,
-          evidence: [evidence]
-        }]
+      if (!updated) {
+        state = [
+          ...state,
+          {
+            code: action.code,
+            status: "pending review",
+            assessment_record: action.record_id,
+            evidence: [evidence],
+          },
+        ]
       }
       return state
     default:

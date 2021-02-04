@@ -1,9 +1,9 @@
-import decode from 'jwt-decode'
+import decode from "jwt-decode"
 
-import { get, set } from './localstorage'
+import { get, set } from "./localstorage"
 
-export function isAuthenticated () {
-  const token = get('token')
+export function isAuthenticated() {
+  const token = get("token")
 
   if (token) {
     const payload = decode(token)
@@ -19,31 +19,31 @@ export function isAuthenticated () {
   }
 }
 
-export function registrationIsPending () {
-  const token = get('token')
+export function registrationIsPending() {
+  const token = get("token")
 
   if (token) {
     const payload = decode(token)
     return !payload.registration_confirmed
   }
-  
+
   return false
 }
 
-export function isTeacher () {
-  return checkUserTypeIs('teacher')
+export function isTeacher() {
+  return checkUserTypeIs("teacher")
 }
 
-export function isStudent () {
-  return checkUserTypeIs('student')
+export function isStudent() {
+  return checkUserTypeIs("student")
 }
 
-export function isNoOne () {
+export function isNoOne() {
   return checkUserTypeIs(null)
 }
 
-export function checkUserTypeIs (type) {
-  const token = get('token')
+export function checkUserTypeIs(type) {
+  const token = get("token")
 
   if (token) {
     const payload = decode(token)
@@ -51,24 +51,24 @@ export function checkUserTypeIs (type) {
     const confirmed = payload.registration_confirmed
     return confirmed && role == type
   }
-  
+
   return false
 }
 
-export function saveUserToken (token) {
-  set('token', token)
+export function saveUserToken(token) {
+  set("token", token)
   return decode(token)
 }
 
-export function getUserToken () {
-  return get('token')
+export function getUserToken() {
+  return get("token")
 }
 
-export function getUserTokenInfo () {
-  const token = get('token')
+export function getUserTokenInfo() {
+  const token = get("token")
   return token ? decode(token) : null
 }
 
-export function removeUser () {
-  set('token', null)
+export function removeUser() {
+  set("token", null)
 }

@@ -10,7 +10,11 @@
     "postinstall": "webpack",
     "dev": "run-p watch:client watch:server",
     "watch:client": "webpack --watch",
-    "watch:server": "nodemon --watch server"
+    "watch:server": "nodemon --watch server",
+    "db:reset": "run-s db:delete db:migrate db:seed",
+    "db:migrate": "npx knex migrate:latest",
+    "db:seed": "npx knex seed:run",
+    "db:delete": "rm -f dev.sqlite3"
   },
   "author": "EDA",
   "license": "ISC",
