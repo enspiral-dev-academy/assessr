@@ -1,40 +1,40 @@
-import { saveUserToken } from '../utils/auth'
-import { login } from '../apis/auth'
+import { saveUserToken } from "../utils/auth"
+import { login } from "../apis/auth"
 
-export function requestLogin () {
+export function requestLogin() {
   return {
-    type: 'LOGIN_REQUEST',
+    type: "LOGIN_REQUEST",
     isFetching: true,
-    isAuthenticated: false
+    isAuthenticated: false,
   }
 }
 
-export function receiveLogin (user) {
+export function receiveLogin(user) {
   return {
-    type: 'LOGIN_SUCCESS',
+    type: "LOGIN_SUCCESS",
     isFetching: false,
     isAuthenticated: true,
-    user
+    user,
   }
 }
 
-export function loginError (message) {
+export function loginError(message) {
   return {
-    type: 'LOGIN_FAILURE',
+    type: "LOGIN_FAILURE",
     isFetching: false,
     isAuthenticated: false,
-    message
+    message,
   }
 }
 
-export function loginUser (creds) {
+export function loginUser(creds) {
   return dispatch => {
     dispatch(requestLogin(creds))
     return login(creds)
-      .then((token) => {
+      .then(token => {
         const userInfo = saveUserToken(token)
         dispatch(receiveLogin(userInfo))
-        document.location = '/#/'
+        document.location = "/#/"
       })
       .catch(err => {
         dispatch(loginError(err.response.body.message))
