@@ -1,55 +1,55 @@
-import { isAuthenticated, getUserTokenInfo } from '../utils/auth'
+import { isAuthenticated, getUserTokenInfo } from "../utils/auth"
 
 const initialState = {
   isFetching: false,
   isAuthenticated: isAuthenticated(),
   user: getUserTokenInfo(),
-  errorMessage: ''
+  errorMessage: "",
 }
 
-export default function auth (state = initialState, action) {
+export default function auth(state = initialState, action) {
   switch (action.type) {
-    case 'LOGIN_REQUEST':
+    case "LOGIN_REQUEST":
       return {
         ...state,
         isFetching: true,
         isAuthenticated: false,
-        errorMessage: ''
+        errorMessage: "",
       }
-    case 'LOGIN_SUCCESS':
+    case "LOGIN_SUCCESS":
       return {
         ...state,
         isFetching: false,
         isAuthenticated: true,
-        user: action.user
+        user: action.user,
       }
-    case 'LOGIN_FAILURE':
+    case "LOGIN_FAILURE":
       return {
         ...state,
         isFetching: false,
         isAuthenticated: false,
-        errorMessage: action.message
+        errorMessage: action.message,
       }
-    case 'LOGOUT_SUCCESS':
+    case "LOGOUT_SUCCESS":
       return {
         ...state,
         isFetching: false,
         isAuthenticated: false,
-        user: null
+        user: null,
       }
-    case 'REGISTER_REQUEST':
+    case "REGISTER_REQUEST":
       return {
         ...state,
         isFetching: true,
         isAuthenticated: false,
-        errorMessage: ''
+        errorMessage: "",
       }
-    case 'REGISTER_FAILURE':
+    case "REGISTER_FAILURE":
       return {
         ...state,
         isFetching: false,
         isAuthenticated: false,
-        errorMessage: action.message
+        errorMessage: action.message,
       }
     default:
       return state

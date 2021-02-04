@@ -6,10 +6,15 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node server",
+    "test": "jest --watchAll --noStackTrace",
     "postinstall": "webpack",
     "dev": "run-p watch:client watch:server",
     "watch:client": "webpack --watch",
-    "watch:server": "nodemon --watch server"
+    "watch:server": "nodemon --watch server",
+    "db:reset": "run-s db:delete db:migrate db:seed",
+    "db:migrate": "npx knex migrate:latest",
+    "db:seed": "npx knex seed:run",
+    "db:delete": "rm -f dev.sqlite3"
   },
   "author": "EDA",
   "license": "ISC",
@@ -23,14 +28,8 @@
       "@babel/plugin-proposal-object-rest-spread"
     ]
   },
-  "jest": {
-    "setupFiles": [
-      "./tests/client/setup-enzyme.js"
-    ]
-  },
   "devDependencies": {
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
+    "@testing-library/react": "^10.4.8",
     "nodemon": "^2.0.2",
     "sqlite3": "^4.1.1",
     "supertest": "^4.0.2"

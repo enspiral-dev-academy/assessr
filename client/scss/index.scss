@@ -1,20 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Crete+Round&family=Lato:wght@300;400;700&display=swap');
-@import './variables.scss';
+@import url("https://fonts.googleapis.com/css2?family=Crete+Round&family=Lato:wght@300;400;700&display=swap");
+@import "./variables.scss";
 
 // Base
-*, html {
+*,
+html {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
   font-family: $font-base;
-  background-color:$body-bg;
+  background-color: $body-bg;
   color: $text-color;
   font-size: 16px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: $font-headings;
   font-weight: normal;
   color: $brand-dark;
@@ -30,7 +33,6 @@ a {
   width: 90%;
   max-width: 1100px;
 }
-
 
 // Header
 // -------
@@ -50,22 +52,22 @@ a {
 .logo-title {
   font-size: 2.4rem;
   margin: 0;
-  padding: 1rem .8rem;
+  padding: 1rem 0.8rem;
 }
 
 .navbar-item {
   display: inline-block;
-  padding: .8rem;
+  padding: 0.8rem;
 }
-
 
 // Forms
 // -----
-input, button {
+input,
+button {
   border-width: 1px;
-  border-radius: .2rem;
-  padding: .5rem .8rem;
-  background-color: $body-bg; 
+  border-radius: 0.2rem;
+  padding: 0.5rem 0.8rem;
+  background-color: $body-bg;
 }
 
 .center-form {
@@ -91,7 +93,7 @@ input, button {
 .form-row {
   display: flex;
   align-items: center;
-  margin-bottom: .8rem;
+  margin-bottom: 0.8rem;
 }
 
 .assmt-form {
@@ -113,7 +115,6 @@ input, button {
 // Assmt List
 // ------------
 .assmt-row {
-
   @include tablet {
     display: flex;
     flex-wrap: wrap;
@@ -124,7 +125,7 @@ input, button {
 .assmt {
   border-bottom: 1px solid $border-color;
   padding: 1rem;
-  transition: all ease .3s;
+  transition: all ease 0.3s;
 
   &:hover {
     background-color: $border-color;
@@ -132,10 +133,10 @@ input, button {
 
   @include tablet {
     width: 49%;
-    margin: .5%;
+    margin: 0.5%;
     border: 1px solid $border-color;
     padding: 2rem;
-    border-radius: .4rem;
+    border-radius: 0.4rem;
   }
 
   @include desktop {

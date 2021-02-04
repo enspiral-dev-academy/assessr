@@ -1,90 +1,84 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from "react"
+import { connect } from "react-redux"
 
-import { submitEvidence } from "../../actions/assessments";
-import Evidence from "./Evidence";
+import { submitEvidence } from "../../actions/assessments"
+import Evidence from "./Evidence"
 
 class AssessmentItem extends React.Component {
   state = {
     showMore: false,
     evidence: "",
-  };
+  }
 
-  findRecord = (assessments) => {
-    const code = this.props.assessment.code;
-    const match = assessments.find((assmt) => {
-      return assmt.code == code;
-    });
-    return match;
-  };
+  findRecord = assessments => {
+    const code = this.props.assessment.code
+    const match = assessments.find(assmt => {
+      return assmt.code == code
+    })
+    return match
+  }
 
   findRecordId = () => {
-    const match = this.findRecord(this.props.assessments);
-    return match ? match.assessment_record : null;
-  };
+    const match = this.findRecord(this.props.assessments)
+    return match ? match.assessment_record : null
+  }
 
-  findStatus = (assessments) => {
-    const match = this.findRecord(assessments);
-    return match ? match.status : "not yet";
-  };
+  findStatus = assessments => {
+    const match = this.findRecord(assessments)
+    return match ? match.status : "not yet"
+  }
 
-  findEvidence = (assessments) => {
-    const code = this.props.assessment.code;
-    let match = assessments.find((assmt) => {
-      return assmt.code == code;
-    });
-    return match != undefined ? match.evidence : [];
-  };
+  findEvidence = assessments => {
+    const code = this.props.assessment.code
+    let match = assessments.find(assmt => {
+      return assmt.code == code
+    })
+    return match != undefined ? match.evidence : []
+  }
 
-  getColour = (status) => {
+  getColour = status => {
     switch (status) {
       case "complete":
-        return "green";
+        return "green"
       case "pending review":
-        return "yellow";
+        return "yellow"
       case "in progress":
-        return "orange";
+        return "orange"
       default:
-        return "notyet";
+        return "notyet"
     }
-  };
+  }
 
   toggleMore = () => {
     this.setState({
       showMore: !this.state.showMore,
-    });
-  };
+    })
+  }
 
-  handleTyping = (evt) => {
+  handleTyping = evt => {
     this.setState({
       evidence: evt.target.value,
-    });
-  };
+    })
+  }
 
-  submit = (evt) => {
-    evt.preventDefault();
-    this.props.dispatch(
-      submitEvidence(this.props.assessment.code, this.state.evidence)
-    );
+  submit = evt => {
+    evt.preventDefault()
+    this.props.dispatch(submitEvidence(this.props.assessment.code, this.state.evidence))
     this.setState({
       evidence: "",
-    });
-  };
+    })
+  }
 
   renderSubmit = () => {
     return (
       <form className="assmt-form" onSubmit={this.submit}>
-        <input
-          type="text"
-          onChange={this.handleTyping}
-          value={this.state.evidence}
-        />
+        <input type="text" onChange={this.handleTyping} value={this.state.evidence} />
         <button onClick={this.submit}>
-          <i class="fas fa-arrow-right"></i>
+          <i className="fas fa-arrow-right"></i>
         </button>
       </form>
-    );
-  };
+    )
+  }
 
   renderMore = (status, evidence) => {
     return (
@@ -96,13 +90,13 @@ class AssessmentItem extends React.Component {
         </ul>
         {status != "complete" && this.renderSubmit()}
       </React.Fragment>
-    );
-  };
+    )
+  }
 
   render = () => {
-    const assmt = this.props.assessment;
-    const status = this.findStatus(this.props.completed);
-    const evidence = this.findEvidence(this.props.completed);
+    const assmt = this.props.assessment
+    const status = this.findStatus(this.props.completed)
+    const evidence = this.findEvidence(this.props.completed)
 
     return (
       <article className={`assmt ${this.getColour(status)}`}>
@@ -111,14 +105,14 @@ class AssessmentItem extends React.Component {
         </p>
         {this.state.showMore && this.renderMore(status, evidence)}
       </article>
-    );
-  };
+    )
+  }
 }
 
 function mapStateToProps(state) {
   return {
     completed: state.completed,
-  };
+  }
 }
 
-export default connect(mapStateToProps)(AssessmentItem);
+export default connect(mapStateToProps)(AssessmentItem)
