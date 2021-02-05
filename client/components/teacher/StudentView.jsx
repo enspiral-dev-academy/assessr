@@ -14,7 +14,7 @@ class Students extends React.Component {
     return (
       <div>
         {this.props.modules.map(mod => (
-          <AssessmentList module={mod} />
+          <AssessmentList key={mod.id} module={mod} />
         ))}
       </div>
     )

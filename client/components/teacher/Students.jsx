@@ -13,8 +13,8 @@ class Students extends React.Component {
     return (
       <div>
         <p>Click on a Student to view their assessments:</p>
-        {this.props.students.map((student, i) => (
-          <Link key={i} to={`/students/${student.user_id}`}>
+        {this.props.students.map(student => (
+          <Link key={student.user_id} to={`/students/${student.user_id}`}>
             {student.actual_name}
           </Link>
         ))}
