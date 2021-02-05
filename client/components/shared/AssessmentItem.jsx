@@ -33,7 +33,9 @@ class AssessmentItem extends React.Component {
     let match = assessments.find(assmt => {
       return assmt.code == code
     })
-    return match != undefined ? match.evidence : []
+    // TODO: This hack will be fixed when we move
+    // to TypeScript and refactor the domain model
+    return !!match ? match.evidence || match.submissions : []
   }
 
   getColour = status => {
